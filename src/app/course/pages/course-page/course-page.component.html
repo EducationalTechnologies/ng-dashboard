@@ -1,0 +1,32 @@
+
+
+<lte-content-row>
+    <div class="col-lg-12">
+        <lte-card title="My Courses">
+            <lte-table>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Course</th>
+                    <th>Progress</th>
+                    <th style="width: 40px">StartDate</th>
+                    <th style="width: 40px">EndDate</th>
+                  </tr>
+                  <tr *ngFor="let course of courses$ | async" >
+                      <td>{{course.id}}</td>
+                      <td>todo course title</td>
+                      <td>
+                        <div class="progress progress-xs">
+                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                        </div>
+                      </td>
+                      <td><span class="badge bg-red">{{course.startDate}}</span></td>
+                      <td><span class="badge bg-red">{{course.endDate}}</span></td>
+                    </tr>
+            </lte-table>
+          </lte-card>
+        
+            
+            
+    </div>
+  </lte-content-row>
+{{courses$|async|json}}
