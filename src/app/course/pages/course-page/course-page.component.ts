@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CourseService} from '../../../core/services/course.service';
 
 import { select, Store } from '@ngrx/store';
 import * as fromCourses from '../../reducers';
@@ -16,9 +17,10 @@ import { Course } from '../../models/course';
 })
 export class CoursePageComponent implements OnInit {
 
+
   private courses$ : Observable<Course[]>;
   
-  private eenCourse:Course;
+
   constructor(
     private store: Store<fromCourses.State>,
     ) { 

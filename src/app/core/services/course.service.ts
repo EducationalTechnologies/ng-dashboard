@@ -13,9 +13,6 @@ export class CourseService {
 
   list(): Observable<Course[]> {
     return this.http
-      .get<Course[]>(this.API_PATH)
-      
+      .get<Course[]>(this.API_PATH);
   }
-
-  
 }
