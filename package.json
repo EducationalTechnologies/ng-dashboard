@@ -26,7 +26,6 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "ng-admin-lte": "file:../../ng-admin-lte/dist/ng-admin-lte-0.0.0.tgz",
-    "ng-tla-services": "file:../ng-tla-services/dist/ng-tla-services-0.0.0.tgz",
     "rxjs": "^6.1.0",
     "rxjs-compat": "^6.1.0",
     "zone.js": "^0.8.26"
