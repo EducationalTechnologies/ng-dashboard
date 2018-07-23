@@ -4,20 +4,18 @@
     <li class="nav-item d-none d-sm-inline-block">
       <a href="." class="nav-link">Home</a>
     </li>
-    
+
 
   </lte-header>
 
   <lte-main-sidebar logo="" brand="TRULA" link="">
-      <li lte-menu-item [hasChildren]="false" title ="Courses" router="/courses">
+    <li lte-menu-item [hasChildren]="false" title="Courses" router="/courses">
       <li lte-menu-item [hasChildren]="true" title="Pages" router="/">
-      
-          <ul ng-sidebar-pages-menu class="nav nav-treeview"></ul>
-  
+        <ul ng-sidebar-pages-menu class="nav nav-treeview"></ul>
       </li>
-  
-    </lte-main-sidebar>
+      <li lte-menu-item [hasChildren]="false" title="Settings" router="/user"></li>
+  </lte-main-sidebar>
   <div class="content-wrapper">
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </div>
 </div>

@@ -11,7 +11,7 @@ import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { reducers } from './reducers';
-
+import {UserModule } from './user/user.module';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -25,6 +25,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
   ],
   imports: [
+    UserModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,

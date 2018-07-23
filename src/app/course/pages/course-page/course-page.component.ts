@@ -19,11 +19,11 @@ export class CoursePageComponent implements OnInit {
 
 
   private courses$ : Observable<Course[]>;
-  
+
 
   constructor(
     private store: Store<fromCourses.State>,
-    ) { 
+    ) {
       this.courses$ = store.pipe(select(fromCourses.selectCourses));
 
     }
