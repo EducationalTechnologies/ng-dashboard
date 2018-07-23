@@ -15,7 +15,7 @@ import {NgAdminLteModule} from 'ng-admin-lte';
   imports: [
     CommonModule,
     CourseRoutingModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forFeature('courses', reducers),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([CourseEffects]),
     NgAdminLteModule

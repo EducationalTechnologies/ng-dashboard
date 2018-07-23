@@ -1,0 +1,20 @@
+
+        <ngx-charts-polar-chart
+        
+        [view]="view"
+        class="chart-container"
+        
+        (activate)="activate($event)"
+        [results]="data"
+        [legend]="showLegend"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        
+        (legendLabelClick)="onLegendLabelClick($event)"
+
+        (select)="onClick($event)"
+        >
+      </ngx-charts-polar-chart>
+    
