@@ -17,6 +17,7 @@ export class CourseEffects {
      .switchMap(
          payload =>  this.courses.list()
          .map(res => {
+             console.log('im here', res);
              return new CourseActions.LoadSuccess(res);
         })
        

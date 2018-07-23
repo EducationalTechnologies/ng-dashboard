@@ -1,0 +1,8 @@
+
+    
+    <lte-card [title]="column.title" [options]="cardOptionsNewProject" (btnClick)="clickHeaderButton($event)">
+    
+        {{column|json}}
+    <visualisation *ngIf="column.widget" [id]="column.widget.vizId" [visData]="data"></visualisation>
+
+    </lte-card>

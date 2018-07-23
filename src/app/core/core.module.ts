@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
-// import { AppComponent } from './containers/app.component';
-// import { NotFoundPageComponent } from './containers/not-found-page.component';
-
-
 import { CourseService } from './services/course.service';
+import { DashboardService } from './services/dashboard.service';
 
 export const COMPONENTS = [
 
@@ -21,7 +17,7 @@ export class CoreModule {
   static forRoot() {
     return {
       ngModule: CoreModule,
-      providers: [CourseService],
+      providers: [CourseService,DashboardService],
     };
   }
 }
