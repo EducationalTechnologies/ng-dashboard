@@ -20,7 +20,7 @@ export class CoursePageComponent implements OnInit {
 
   constructor(
     private store: Store<fromCourses.State>,
-    ) { 
+    ) {
       this.courses$ = store.pipe(select(fromCourses.selectCourses));
 
     }

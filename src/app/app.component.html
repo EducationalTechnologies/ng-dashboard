@@ -1,21 +1,18 @@
 <div class="wrapper">
   <lte-header>
-
     <li class="nav-item d-none d-sm-inline-block">
       <a href="." class="nav-link">Home</a>
     </li>
-    
-
   </lte-header>
 
-  <lte-main-sidebar logo="assets/images/io.png" brand="TRULA" link="http://io-things.eu">
-      <li lte-menu-item [hasChildren]="false" title ="Courses" router="/courses">
-        <li lte-menu-item [hasChildren]="false" title ="Courses" router="/courses"></li>
-        
+  <lte-main-sidebar logo="assets/images/TLA_Dashboard_Shield.png" brand="TLA" link="http://io-things.eu">
+    <li lte-menu-item [hasChildren]="false" title="Courses" router="/courses"></li>
+    <li lte-menu-item [hasChildren]="false" title="Courses" router="/courses"></li>
+    <li lte-menu-item [hasChildren]="false" title="Settings" router="/settings"></li>
   </lte-main-sidebar>
   <div class="content-wrapper">
-      <!-- <visualisation [id]="vizId" [visData]="data"></visualisation> -->
-   
-      <router-outlet></router-outlet>
+    <!-- <visualisation [id]="vizId" [visData]="data"></visualisation> -->
+
+    <router-outlet></router-outlet>
   </div>
 </div>
