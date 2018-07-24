@@ -1,0 +1,44 @@
+
+.timeline-line {
+    border-left: 2px solid var(--dipf-blue);
+    position: absolute;
+    display: block;
+    top: -15px;
+    left: 55px;
+    height: 100%;
+  }
+
+  .timeline-box {
+    display: flex;
+    margin-bottom: 15px;
+    z-index: 10;
+  }
+
+  .timeline-indicator {
+    z-index: 10;
+    background: var(--dipf-blue);
+    border: 2px solid var(--dipf-gray);
+    margin-bottom: 15px;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  
+@media screen and (min-width: 641px) {
+    .timeline-box {
+      padding-left: 40px;
+      flex-direction: row;
+      align-items: center;
+    }
+  
+    .timeline-card {
+      width: 600px;
+      margin-left: 10px;
+    }
+  
+    .timeline-indicator {
+      margin-left: 10px;
+    }
+  }
+  

@@ -1,15 +1,33 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SettingsPageComponent } from './pages/settings-page.component';
-import { UserRoutingModule } from './user-routing.module';
-import { NgAdminLteModule } from '../../../node_modules/ng-admin-lte';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { SettingsPageComponent } from "./pages/settings-page.component";
+import { UserRoutingModule } from "./user-routing.module";
+import { NgAdminLteModule } from "ng-admin-lte";
+import { ConsentPageComponent } from "./pages/consent-page.component";
+import { MaterialModule } from "../material.module";
+import { ConsentService } from "./services/consent.service";
+import { CoreModule } from "../core/core.module";
+import { EventService } from "./services/event.service";
+import { SettingsService } from "./services/settings.service";
+import { TimelinePageComponent } from "./pages/timeline-page.component";
+import { PrivacySettingsPageComponent } from "./pages/privacy-settings-page.component";
+import { TimelineItemComponent } from './components/timeline-item.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    CoreModule,
     UserRoutingModule,
-    NgAdminLteModule
+    NgAdminLteModule,
+    MaterialModule
   ],
-  declarations: [SettingsPageComponent]
+  declarations: [
+    SettingsPageComponent,
+    ConsentPageComponent,
+    TimelinePageComponent,
+    PrivacySettingsPageComponent,
+    TimelineItemComponent
+  ],
+  providers: [SettingsService, ConsentService, EventService]
 })
-export class UserModule { }
+export class UserModule {}

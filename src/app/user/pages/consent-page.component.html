@@ -1,0 +1,156 @@
+<section class="mat-typography scrollWrapper" id="consentFormWrapper"  #consentFormWrapper >
+  <div >
+    <h1>
+      Informed Consent
+    </h1>
+
+    <div class="grid-container">
+      <div class="consent-form">
+        <form [formGroup]="consentForm" (ngSubmit)="onSubmit()">
+          <mat-card class="dashboard-card">
+            <mat-card-header>
+              <mat-card-title>
+                <h2>Introduction</h2>
+                <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" xPosition="before">
+                  <button mat-menu-item>Expand</button>
+                  <button mat-menu-item>Remove</button>
+                </mat-menu>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="dashboard-card-content">
+              <div>
+                <p *ngFor="let paragraph of consentData.introduction">
+                  {{paragraph}}
+                </p>
+              </div>
+              <mat-expansion-panel 
+              class="CLICKLOG LOG-expansion-terms-and-conditions"
+              (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title
+                  class="log-expansion-terms-and-conditions">
+                    Terms and Conditions
+                  </mat-panel-title>
+                  <mat-panel-description>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="terms-text" #termsAndConditions>
+                  <p>{{termsText}}</p>
+                </div>
+              </mat-expansion-panel>
+              <mat-card-actions>
+                <mat-checkbox formControlName="hasReadIntroduction" class="consent-form-control" name="checkboxIntroduction" required>
+                  <b class="consent-form-control">
+                    I understand that I can choose not to opt-in into the collection of data and that I will suffer no disadvantages from doing
+                    so
+                  </b>
+                </mat-checkbox>
+                <br/>
+                <mat-checkbox formControlName="hasReadTermsAndConditions">
+                  <b class="consent-form-control">
+                    I have read and understood the terms and conditions.
+                  </b>
+                </mat-checkbox>
+              </mat-card-actions>
+            </mat-card-content>
+          </mat-card>
+          <!-- -->
+          <mat-card class="dashboard-card consent-card">
+            <mat-card-header>
+              <mat-card-title>
+                <h2>What is my Data used for?</h2>
+                <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" xPosition="before">
+                  <button mat-menu-item>Expand</button>
+                  <button mat-menu-item>Remove</button>
+                </mat-menu>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="dashboard-card-content">
+              <div>
+                <p *ngFor="let paragraph of consentData.disclaimerDataUsage">
+                  {{paragraph}}
+                </p>
+              </div>
+
+              <mat-card-actions>
+                <mat-checkbox formControlName="hasReadDataUsage" id="checkboxDataUsedFor">
+                  <b class="consent-form-control">
+                    I understand that my data will be used for research in the context of the
+                    <a href="https://edutec.guru/">
+                      Trusted Learning Analytics
+                    </a> environment.
+                  </b>
+                </mat-checkbox>
+
+              </mat-card-actions>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-divider></mat-divider>
+
+          <h2>Data Types</h2>
+          <mat-card class="data-type-card" *ngFor="let dataType of consentData.dataTypes">
+            <mat-card-header>
+              <mat-card-title>
+                <span class="card-title">
+                  <mat-icon>{{dataType.icon}}</mat-icon>
+                  <h3>{{dataType.name}}</h3>
+                </span>
+                <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" xPosition="before">
+                  <button mat-menu-item>Expand</button>
+                  <button mat-menu-item>Remove</button>
+                </mat-menu>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="dashboard-card-content">
+              <mat-expansion-panel
+              class="CLICKLOG LOG-expansion-data-type-read-more"
+              (opened)="onPanelExpanded(dataType)" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Read more
+                  </mat-panel-title>
+                  <mat-panel-description>
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div>
+                  <h4>What data is collected?</h4>
+                  <ul>
+                    <li *ngFor="let data of dataType.dataCollected">
+                      {{data}}
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="mat-h4">How long is this data stored?</h4>
+                  <p>
+                    The {{dataType.name}} will be stored for {{dataType.storageDuration}} days
+                  </p>
+                </div>
+              </mat-expansion-panel>
+
+              <mat-card-actions>
+                <mat-slide-toggle name="toggleArs" [color]="primary" formControlName="consentArs">
+                  <b>
+                    I consent to the usage of {{dataType.name}}
+                  </b>
+                </mat-slide-toggle>
+              </mat-card-actions>
+            </mat-card-content>
+          </mat-card>
+
+          <button class="submitButton" [disabled]="!consentForm.valid" mat-raised-button color="primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
