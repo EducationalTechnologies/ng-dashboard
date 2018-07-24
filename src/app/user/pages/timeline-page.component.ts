@@ -8,6 +8,7 @@ import { EventService } from "../services/event.service";
 })
 export class TimelinePageComponent implements OnInit {
   events: any[];
+  eventsByDay: any;
 
   constructor(private eventService: EventService) {}
 
@@ -20,10 +21,20 @@ export class TimelinePageComponent implements OnInit {
         const d2 = new Date(e2.timestamp).getTime();
         return d1 - d2;
       });
+      this.eventsByDay = this.getEventsByDay(this.events);
     });
   }
 
-  getEventsByDay(events: any) {}
-
-
+  getEventsByDay(events: any) {
+    const eventDays = {};
+    for (const event of events) {
+      const eventDay = event.toLocaleDateString();
+      if (!eventDays[eventDay]) {
+        eventDays[eventDay] = [event];
+      } else {
+        eventDays[eventDay].push(event);
+      }
+    }
+    return eventDays;
+  }
 }
