@@ -1,10 +1,10 @@
-:root {
-  --dipf-blue: rgb(102, 153, 204);
-  --dipf-gray: rgb(102, 102, 102);
-  --dipf-orange: rgb(225, 153, 0);
-}
+
 
 .filter-box {
   margin-left: 50px;
   margin-bottom: 30px;
+}
+
+.timeline-day-header{
+  margin-left: 40px;
 }

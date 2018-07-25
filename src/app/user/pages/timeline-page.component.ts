@@ -8,7 +8,7 @@ import { EventService } from "../services/event.service";
 })
 export class TimelinePageComponent implements OnInit {
   events: any[];
-  eventsByDay: any;
+  eventsByDay: any[];
 
   constructor(private eventService: EventService) {}
 
@@ -22,18 +22,33 @@ export class TimelinePageComponent implements OnInit {
         return d1 - d2;
       });
       this.eventsByDay = this.getEventsByDay(this.events);
+      console.log("Events by day: ", this.eventsByDay);
     });
   }
 
   getEventsByDay(events: any) {
-    const eventDays = {};
+    const eventDays = [];
     for (const event of events) {
-      const eventDay = event.toLocaleDateString();
-      if (!eventDays[eventDay]) {
-        eventDays[eventDay] = [event];
-      } else {
-        eventDays[eventDay].push(event);
+      const eventDay = new Date(event.timestamp).toLocaleDateString();
+      // Date needs to be serialized first for date comparison
+      let index = -1;
+      for (let i = 0; i < eventDays.length; i++) {
+        const alreadyAddedDay = eventDays[i];
+        if (alreadyAddedDay.day === eventDay) {
+          index = i;
+        }
       }
+
+      if (index === -1) {
+        eventDays.push({
+          day: eventDay,
+          events: [event]
+        });
+      } else {
+        eventDays[index]["events"].push(event);
+      }
+
+      console.log("Event iter: ", event);
     }
     return eventDays;
   }

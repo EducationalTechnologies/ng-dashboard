@@ -74,6 +74,21 @@ const events = [
       success: true,
       completion: true
     }
+  },
+  {
+    timestamp: "2018-04-05T12:15:00+02:00",
+    version: "1.0.0",
+    actor: "You",
+    verb: "started",
+    object: "Assignment 001",
+    course: "Seminar Learning Analytics",
+    result: {
+      score: {
+        scaled: 0.35
+      },
+      success: false,
+      completion: true
+    }
   }
 ];
 
