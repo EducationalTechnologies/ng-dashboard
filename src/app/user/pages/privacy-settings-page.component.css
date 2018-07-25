@@ -15,7 +15,7 @@
 }
 
 .active-row {
-    background-color: rgb(219, 219, 219);
+  background-color: rgb(219, 219, 219);
 }
 
 .settings-buttons {
@@ -27,14 +27,17 @@
 }
 
 .enable-slider {
-    min-width: 150px;
-    margin-right: 10px;
+  min-width: 150px;
+  margin-right: 10px;
 }
-
 
 
 @media (max-width: 768px) {
   .settings-overview-card {
+    grid-column: col-start 1 / span 12;
+  }
+
+  .functionality-card {
     grid-column: col-start 1 / span 12;
   }
 
@@ -47,19 +50,31 @@
     padding-left: 2px;
     padding-right: 2px;
   }
-  /* CSS in here for mobile only */
+  
+  .button-horizontal-list{
+    display: none;
+  }
+
+  .functions-dropdown-list{
+    
+  }
 }
 
-@media (min-width: 769px)
-{
+@media (min-width: 769px) {
+  .selected-data-item {
+    grid-column: 2;
+  }
 
+  .mat-list button {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 
-    .selected-data-item {
-        grid-column: 2;
-      }
+  .button-horizontal-list{
+    display: flex;
+  }
 
-      .mat-list button{
-        margin-left: 5px;
-        margin-right: 5px;
-    }
+  .functions-dropdown-list{
+    display: none;
+  }
 }

@@ -1,4 +1,5 @@
 <section class="mat-typography">
+  <h1>Privacy Settings</h1>
   <div class="settings-wrapper">
     <div class="settings-overview-card">
       <mat-card>
@@ -21,32 +22,49 @@
 
             <mat-list>
               <mat-list-item *ngFor="let data of selectedCourse.data; let i = index" (click)="highlightClickedRow(courseIndex, i)" [class.active-row]="i == selectedRow">
-                <span class="data-name">{{ data.name }}</span>
-                <div class="enable-slider">
-                  <mat-slide-toggle [color]="Green" [(ngModel)]="data.enabled" [checked]="data.enabled" [disabled]="disabled">
-                    <span *ngIf="data.enabled" class="label label-success">Enabled</span>
-                    <span *ngIf="!data.enabled" class="label label-danger">Disabled</span>
-                  </mat-slide-toggle>
-                </div>
-                <button mat-raised-button>
+                <button mat-icon-button>
                   <mat-icon>info</mat-icon>
-                  INFO
                 </button>
 
-                <button mat-raised-button>
+                <span class="data-name">{{ data.name }}</span>
+                <div class="enable-slider">
+                  <mat-slide-toggle color="primary" [(ngModel)]="data.enabled" [checked]="data.enabled" [disabled]="disabled">
+                    <span *ngIf="data.enabled" class="label">Enabled</span>
+                    <span *ngIf="!data.enabled" class="label">Disabled</span>
+                  </mat-slide-toggle>
+                </div>
+
+                <div class="functions-dropdown-list">
+                  <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                      <mat-icon>save_alt</mat-icon>
+                      <span>Download</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>delete</mat-icon>
+                      <span>Delete</span>
+                    </button>
+                  </mat-menu>
+                </div>
+
+                <div class="button-horizontal-list">
+
+                  <button mat-raised-button>
                     <mat-icon>save_alt</mat-icon>
-                  DOWNLOAD
-                  <i class="fa fa-download" aria-hidden="true"> </i>
-                </button>
-                <button mat-raised-button>
+                    DOWNLOAD
+                  </button>
+                  <button mat-raised-button>
                     <mat-icon>delete</mat-icon>
-                  DELETE
-                  <i class="fa fa-times" aria-hidden="true"> </i>
-                </button>
+                    DELETE
+                  </button>
+                </div>
               </mat-list-item>
             </mat-list>
           </div>
-<!-- 
+          <!-- 
           <div class="selected-data-item">
 
             <mat-card *ngIf="selectedDataItem" class="example-card">

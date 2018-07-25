@@ -13,48 +13,127 @@ export class SettingsService {
   }
 }
 
-const data = {
-  introduction: [
-    // tslint:disable-next-line:max-line-length
-    "This form provides you with the information about the data that we aim to collect from you, for what purpose this data collection occurs and who will have access to the data.",
-    // tslint:disable-next-line:max-line-length
-    "In the following sections, we will list all the types of data that we are collecting. You can give your individual consent for each of these data items separately. When you choose to not share a particular type of data, this may mean that some functionality within the Trusted Learning Analytics environment may not be available to you. However, beyond this loss of functionality, you will suffer no disadvantage from not consenting to the collecting and processin of you data.",
-    // tslint:disable-next-line:max-line-length
-    "If you choose to not share a particular type of data, this may mean that some functionality within the Trusted Learning Analytics environment may not be available to you.",
-    "Beyond this loss of functionality, you will suffer no disadvantage from not consenting to the collecting and processin of you data."
-  ],
-  disclaimerDataUsage: [
-    "Your data will be used in the context of the Trusted Learning Analytics environment. ",
-    // tslint:disable-next-line:max-line-length
-    "In the following sections, we will list all the types of data that we are collecting. You can give your individual consent for each of these data items separately. When you choose to not share a particular type of data, this may mean that some functionality within the Trusted Learning Analytics environment may not be available to you. However, beyond this loss of functionality, you will suffer no disadvantage from not consenting to the collecting and processin of you data.",
-  ],
-  dataTypes: [
-    {
-      name: "Audience Response System Data",
-      dataCollected: [
-        "Your answers to the questions that are asked in the ARS app",
-        "The time when you answer these questions"
-      ],
-      icon: "record_voice_over",
-      storageDuration: "250"
-    },
-    {
-      name: "Location Tracking Data",
-      dataCollected: [
-        "The location data as estimated by the tracking beacon in the live lecture"
-      ],
-      icon: "gps_fixed",
-      storageDuration: "120"
-    },
-    {
-      name: "Interactions with the Dashboard",
-      dataCollected: [
-        "The elements that you click on",
-        "The amount of time you spend on a page, including this one",
-        ""
-      ],
-      icon: "list_alt",
-      storageDuration: "120"
-    }
-  ]
-};
+export const data = [
+  {
+    title: "Learning Analytics Seminar",
+    lecturer: "Hendrik Drachsler",
+    startDate: "04.10.2018",
+    widgets: [
+      {
+        name: "Assignment Grade Chart",
+        data: ["Assignment Grades"]
+      },
+      {
+        name: "Goal Attainment Widget",
+        data: [
+          "Number of videos watched",
+          "Number of messages to peers",
+          "Number of Forum Posts"
+        ]
+      },
+      {
+        name: "Social Graph",
+        data: ["Number of messages to peers"]
+      }
+    ],
+    data: [
+      {
+        name: "Number of Forum Posts",
+        description:
+          "The number of posts that you have written in the course forum",
+        enabled: true,
+        canBeDisabled: true
+      },
+      {
+        name: "Contacts in Forum",
+        description: "The persons you reply to in the forum",
+        enabled: true,
+        canBeDisabled: true
+      },
+      {
+        name: "Assignment Grades",
+        description:
+          "The grades that you have received for your assignments in the course",
+        enabled: true,
+        canBeDisabled: false
+      },
+      {
+        name: "Number of videos watched",
+        description:
+          "The number of course relevant videos that you have watched",
+        enabled: true,
+        canBeDisabled: true
+      },
+      {
+        name: "Number of messages to peers",
+        description:
+          "The number of messages that you send to other course participants",
+        enabled: false,
+        canBeDisabled: true
+      }
+    ]
+  },
+  {
+    title: "Computer Graphics Lecture",
+    lecturer: "Detlef Krömker",
+    startDate: "07.04.2018",
+    widgets: [
+      {
+        name: "Assignment Grade Chart",
+        data: ["Assignment Grades"]
+      },
+      {
+        name: "Goal Attainment Widget",
+        data: ["Number of videos watched"]
+      },
+      {
+        name: "Compiler Warning Rank",
+        data: ["Number of compiler warnings"],
+        description:
+          "A widget that displays the top 10 of the students with least number of compiler warnings for the assignments"
+      },
+      {
+        name: "Goal Attainment Widget",
+        data: [
+          "Number of videos watched",
+          "Number of messages to peers",
+          "Number of Forum Posts"
+        ]
+      },
+      {
+        name: "Procrastination Widget",
+        data: ["Date of Assignment Submission", "Number of videos watched"]
+      }
+    ],
+    data: [
+      {
+        name: "Number of compiler warnings",
+        description:
+          "The number compiler warnings that still remained when you submitted the assignments.",
+        enabled: true,
+        canBeDisabled: true
+      },
+      {
+        name: "Assignment Grades",
+        description:
+          "The grades that you have received for your assignments in the course",
+        enabled: true,
+        canBeDisabled: false
+      },
+      {
+        name: "Number of videos watched",
+        description:
+          "The number of course relevant videos that you have watched",
+        enabled: true,
+        canBeDisabled: true
+      },
+      {
+        name: "Date of Assignment Submission",
+        description:
+          "The number of messages that you sent to other course participants",
+        enabled: false,
+        canBeDisabled: true
+      }
+    ]
+  }
+];
