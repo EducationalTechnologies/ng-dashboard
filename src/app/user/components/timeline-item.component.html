@@ -1,10 +1,8 @@
-<p>WUFF WUFF </p>
 <div class="timeline-box">
   <div class="timeline-line">
   </div>
   <div class="timeline-indicator">
     <div class="timestamp">
-      <div class="event-date">{{getDatestamp(event)}}</div>
       <div class="event-time">{{getTimestamp(event)}}</div>
     </div>
   </div>
@@ -23,8 +21,10 @@
           <mat-panel-description>
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <div class="terms-text" #termsAndConditions>
-          Blah Stuff
+        <div class="details-text mono-font">
+          <pre>
+          {{getDetails(event)}}
+        </pre>
         </div>
       </mat-expansion-panel>
       <mat-card-actions>

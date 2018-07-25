@@ -18,4 +18,8 @@ export class TimelineItemComponent implements OnInit {
   getDatestamp(event: any) {
     return new Date(event.timestamp).toLocaleDateString();
   }
+
+  getDetails(event: any) {
+    return JSON.stringify(event, null, 2);
+  }
 }
