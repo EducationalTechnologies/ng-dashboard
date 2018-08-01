@@ -1,0 +1,47 @@
+<mat-card class="consent-item-card">
+  <mat-card-header>
+    <mat-card-title>
+      <div class="card-title-with-icon">
+        <mat-icon matPrefix>{{consentItem.icon}}</mat-icon>
+        <h3>
+          {{consentItem.name}}</h3>
+      </div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="dashboard-card-content">
+    <mat-expansion-panel class="CLICKLOG LOG-expansion-data-type-read-more" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Read more
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div>
+        <h4>What data is collected?</h4>
+        <ul>
+          <li *ngFor="let data of consentItem.dataCollected">
+            {{data}}
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="mat-h4">How long is this data stored?</h4>
+        <p>
+          The {{consentItem.name}} will be stored for {{consentItem.storageDuration}} days
+        </p>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-card-actions>
+      <mat-slide-toggle name="toggleArs" 
+      [color]="primary"
+      [(checked)]="consentItem.consented"
+      >
+        <b>
+          I consent to the usage of {{consentItem.name}}
+        </b>
+      </mat-slide-toggle>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>

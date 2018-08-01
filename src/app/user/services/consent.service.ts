@@ -1,7 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse
+} from "@angular/common/http";
+import { Consent } from "../models/consent";
+import { catchError } from "../../../../node_modules/rxjs/operators";
 
-const data = {
+const consentData = {
   introduction: [
     // tslint:disable-next-line:max-line-length
     "This form provides you with the information about the data that we aim to collect from you, for what purpose this data collection occurs and who will have access to the data.",
@@ -16,7 +23,7 @@ const data = {
     // tslint:disable-next-line:max-line-length
     "In the following sections, we will list all the types of data that we are collecting. You can give your individual consent for each of these data items separately. When you choose to not share a particular type of data, this may mean that some functionality within the Trusted Learning Analytics environment may not be available to you. However, beyond this loss of functionality, you will suffer no disadvantage from not consenting to the collecting and processin of you data."
   ],
-  dataTypes: [
+  consentItems: [
     {
       name: "Audience Response System Data",
       dataCollected: [
@@ -51,11 +58,50 @@ const data = {
   providedIn: "root"
 })
 export class ConsentService {
-  constructor() {}
+  private API_PATH = "http://localhost:3000/api";
 
-  consentData: Observable<any> = of(data);
+  constructor(private httpClient: HttpClient) {}
+
+  consentData: Observable<any> = of(consentData);
+  consent: Consent;
 
   getConsentData() {
     return this.consentData;
+  }
+
+  getConsent(userId: string): Observable<Consent> {
+    console.log("Obtaining Consent for " + userId);
+    const url = this.API_PATH + `/users/${userId}/consent`;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Access-Control-Allow-Origin": "*"
+      })
+    };
+    return this.httpClient.get(url).map((res: Consent) => {
+      console.log("HTTP CLIENT GET: ", res);
+      return new Consent(res.consented, res.consentItems);
+    });
+    // return this.httpClient.get<Consent>(url, httpOptions);
+  }
+
+  setConsent(userId: string, consent: Consent) {
+    const url = this.API_PATH + `/users/${userId}/consent`;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    };
+    this.httpClient.post<Consent>(url, consent, httpOptions).subscribe(
+      res => {
+        console.log("Post Response Data : ", res);
+      },
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          console.log("Client-side error occured:", err);
+        } else {
+          console.log("Server-side error occured:", err);
+        }
+      }
+    );
   }
 }

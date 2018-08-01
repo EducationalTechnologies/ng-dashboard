@@ -10,16 +10,15 @@ import { Observable } from "rxjs";
   styleUrls: ["./consent-page.component.css"]
 })
 export class ConsentPageComponent implements OnInit {
-  model: Consent;
+  loading = false;
   consentForm: FormGroup;
   consentData: any;
   termsText: string;
+  consent: Consent;
   @ViewChild("consentFormWrapper") consentFormWrapper: ElementRef;
   @ViewChild("termsAndConditions") termsAndConditions: ElementRef;
 
   ngOnInit() {
-    this.model = new Consent(false, false, false, null);
-
     this.consentForm = new FormGroup({
       hasReadIntroduction: new FormControl(false, Validators.requiredTrue),
       hasReadDataUsage: new FormControl(false, Validators.requiredTrue),
@@ -33,6 +32,19 @@ export class ConsentPageComponent implements OnInit {
       this.consentData = data;
     });
 
+    const userId = "Daniel";
+    /*
+    this.consentDataService.getConsent(userId).subscribe(data => {
+        this.consent = new Consent(false, data.consentItems);
+    });
+*/
+    this.loading = true;
+    this.consentDataService.getConsent(userId).subscribe(data => {
+      this.loading = false;
+      this.consent = data;
+      console.log("THIS CONSENT: ", this.consent);
+    });
+
     for (let i = 0; i < 100; i++) {
       // tslint:disable-next-line:max-line-length
       this.termsText +=
@@ -41,8 +53,7 @@ export class ConsentPageComponent implements OnInit {
   }
 
   constructor(
-    private consentDataService: ConsentService,
-    // private loggingService: LoggingService
+    private consentDataService: ConsentService // private loggingService: LoggingService
   ) {}
 
   onPanelExpanded(panelName: any) {
@@ -50,6 +61,7 @@ export class ConsentPageComponent implements OnInit {
   }
 
   onSubmit() {
+    this.consentDataService.setConsent("Daniel", this.consent);
     // console.log("LOG: ", this.loggingService.getLog());
   }
 }

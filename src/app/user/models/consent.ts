@@ -1,8 +1,8 @@
+import { ConsentItem } from "./consent-item";
+
 export class Consent {
   constructor(
-    public hasCheckedIntroduction: boolean,
-    public hasCheckedWhoIsDataFor: boolean,
-    public hasReadTermsAndConditions: boolean,
-    public hasCheckedArs: Map<string, boolean>
+    public consented: boolean,
+    public consentItems: ConsentItem[]
   ) {}
 }

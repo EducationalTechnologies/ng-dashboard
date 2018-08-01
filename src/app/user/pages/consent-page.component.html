@@ -1,11 +1,13 @@
-<section class="mat-typography scrollWrapper" id="consentFormWrapper"  #consentFormWrapper >
-  <div >
+<section class="mat-typography scrollWrapper" id="consentFormWrapper" #consentFormWrapper>
+  <div>
     <h1>
       Informed Consent
     </h1>
-
+    <div class="text-center">
+      <p class="lead" *ngIf="loading">Loading...</p>
+    </div>
     <div class="grid-container">
-      <div class="consent-form">
+      <div class="consent-form" *ngIf="consent">
         <form [formGroup]="consentForm" (ngSubmit)="onSubmit()">
           <mat-card class="dashboard-card">
             <mat-card-header>
@@ -22,16 +24,13 @@
             </mat-card-header>
             <mat-card-content class="dashboard-card-content">
               <div>
-                <p *ngFor="let paragraph of consentData.introduction">
+                <p *ngFor="let paragraph of consent.introduction">
                   {{paragraph}}
                 </p>
               </div>
-              <mat-expansion-panel 
-              class="CLICKLOG LOG-expansion-terms-and-conditions"
-              (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+              <mat-expansion-panel class="CLICKLOG LOG-expansion-terms-and-conditions" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
-                  <mat-panel-title
-                  class="log-expansion-terms-and-conditions">
+                  <mat-panel-title class="log-expansion-terms-and-conditions">
                     Terms and Conditions
                   </mat-panel-title>
                   <mat-panel-description>
@@ -57,7 +56,7 @@
               </mat-card-actions>
             </mat-card-content>
           </mat-card>
-          <!-- -->
+
           <mat-card class="dashboard-card consent-card">
             <mat-card-header>
               <mat-card-title>
@@ -73,7 +72,7 @@
             </mat-card-header>
             <mat-card-content class="dashboard-card-content">
               <div>
-                <p *ngFor="let paragraph of consentData.disclaimerDataUsage">
+                <p *ngFor="let paragraph of consent.disclaimerDataUsage">
                   {{paragraph}}
                 </p>
               </div>
@@ -95,7 +94,9 @@
           <mat-divider></mat-divider>
 
           <h2>Data Types</h2>
-          <mat-card class="data-type-card" *ngFor="let dataType of consentData.dataTypes">
+          <app-consent-item *ngFor="let consentItem of consent.consentItems" [consentItem]="consentItem"></app-consent-item>
+          <!--
+          <mat-card class="data-type-card" *ngFor="let dataType of consentData.consentItems">
             <mat-card-header>
               <mat-card-title>
                 <span class="card-title">
@@ -112,9 +113,7 @@
               </mat-card-title>
             </mat-card-header>
             <mat-card-content class="dashboard-card-content">
-              <mat-expansion-panel
-              class="CLICKLOG LOG-expansion-data-type-read-more"
-              (opened)="onPanelExpanded(dataType)" (closed)="panelOpenState = false">
+              <mat-expansion-panel class="CLICKLOG LOG-expansion-data-type-read-more" (opened)="onPanelExpanded(dataType)" (closed)="panelOpenState = false">
                 <mat-expansion-panel-header>
                   <mat-panel-title>
                     Read more
@@ -146,7 +145,7 @@
                 </mat-slide-toggle>
               </mat-card-actions>
             </mat-card-content>
-          </mat-card>
+          </mat-card> -->
 
           <button class="submitButton" [disabled]="!consentForm.valid" mat-raised-button color="primary">Submit</button>
         </form>
