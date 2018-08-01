@@ -56,7 +56,11 @@
   }
 
   .functions-dropdown-list{
-    
+
+  }
+
+  .mat-list-item-content {
+    padding-left: 0px;
   }
 }
 
