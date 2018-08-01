@@ -36,7 +36,7 @@
     <mat-card-actions>
       <mat-slide-toggle name="toggleArs" 
       [color]="primary"
-      [(checked)]="consentItem.consented"
+      [(ngModel)]="consentItem.consented"
       >
         <b>
           I consent to the usage of {{consentItem.name}}
