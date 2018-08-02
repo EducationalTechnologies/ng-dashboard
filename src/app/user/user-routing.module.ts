@@ -4,12 +4,14 @@ import { SettingsPageComponent } from "./pages/settings-page.component";
 import { ConsentPageComponent } from "./pages/consent-page.component";
 import { TimelinePageComponent } from "./pages/timeline-page.component";
 import { PrivacySettingsPageComponent } from "./pages/privacy-settings-page.component";
+import { LoginSelectionPageComponent } from "./pages/login-selection-page.component";
 
 const routes: Routes = [
   { path: "", component: SettingsPageComponent },
   { path: "consent", component: ConsentPageComponent },
-  {path: "timeline", component: TimelinePageComponent},
-  { path: "settings/privacy", component: PrivacySettingsPageComponent }
+  { path: "timeline", component: TimelinePageComponent },
+  { path: "settings/privacy", component: PrivacySettingsPageComponent },
+  { path: "login", component: LoginSelectionPageComponent }
 ];
 
 @NgModule({
