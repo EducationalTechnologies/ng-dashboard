@@ -22,7 +22,8 @@ import { SignupPageComponent } from './pages/signup-page.component';
     CoreModule,
     UserRoutingModule,
     NgAdminLteModule,
-    MaterialModule
+    MaterialModule,
+    CoreModule
   ],
   declarations: [
     SettingsPageComponent,

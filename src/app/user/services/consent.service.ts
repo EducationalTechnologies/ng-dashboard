@@ -6,7 +6,7 @@ import {
   HttpErrorResponse
 } from "@angular/common/http";
 import { Consent } from "../models/consent";
-import { catchError } from "../../../../node_modules/rxjs/operators";
+import { catchError } from "rxjs/operators";
 
 const consentData = {
   introduction: [
