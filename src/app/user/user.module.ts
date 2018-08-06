@@ -14,6 +14,7 @@ import { PrivacySettingsPageComponent } from "./pages/privacy-settings-page.comp
 import { TimelineItemComponent } from './components/timeline-item.component';
 import { ConsentItemComponent } from './components/consent-item.component';
 import { LoginSelectionPageComponent } from './pages/login-selection-page.component';
+import { SignupPageComponent } from './pages/signup-page.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { LoginSelectionPageComponent } from './pages/login-selection-page.compon
     PrivacySettingsPageComponent,
     TimelineItemComponent,
     ConsentItemComponent,
-    LoginSelectionPageComponent
+    LoginSelectionPageComponent,
+    SignupPageComponent
   ],
   providers: [SettingsService, ConsentService, EventService]
 })
