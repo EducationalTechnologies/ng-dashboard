@@ -15,6 +15,7 @@ import { TimelineItemComponent } from './components/timeline-item.component';
 import { ConsentItemComponent } from './components/consent-item.component';
 import { LoginSelectionPageComponent } from './pages/login-selection-page.component';
 import { SignupPageComponent } from './pages/signup-page.component';
+import { LoginPageComponent } from './pages/login-page.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { SignupPageComponent } from './pages/signup-page.component';
     TimelineItemComponent,
     ConsentItemComponent,
     LoginSelectionPageComponent,
-    SignupPageComponent
+    SignupPageComponent,
+    LoginPageComponent
   ],
   providers: [SettingsService, ConsentService, EventService]
 })
