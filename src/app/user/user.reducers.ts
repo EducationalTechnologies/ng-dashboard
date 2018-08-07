@@ -22,6 +22,7 @@ export function reducer(state: any = initialState, action: Actions): State {
       });
 
     case ActionTypes.AUTHENTICATED:
+    case ActionTypes.SIGNED_UP:
       return Object.assign({}, state, {
         loading: true,
         authenticated: true,
@@ -29,9 +30,18 @@ export function reducer(state: any = initialState, action: Actions): State {
       });
 
     case ActionTypes.SIGN_UP:
+    case ActionTypes.SIGN_OUT:
       return Object.assign({}, state, {
-        authenticated: true,
-        user: action.payload
+        authenticated: false,
+        error: null,
+        loading: true
+      });
+
+    case ActionTypes.SIGNED_OUT:
+      return Object.assign({}, state, {
+        authenticated: false,
+        error: null,
+        user: null
       });
   }
 }
