@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 
-import { Effect, Actions } from "@ngrx/effects";
+import { Effect, Actions, ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
 import { of } from "rxjs";
-import { catchError, map } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/map";
@@ -16,19 +16,24 @@ import { User } from "./models/user";
 import {
   ActionTypes,
   AuthenticateAction,
+  AuthenticatedSuccessAction,
   AuthenticationSuccessAction,
   AuthenticationErrorAction,
   AuthenticatedAction,
   SignedOutAction,
   SignedUpAction,
   SignOutAction,
-  SignUpAction,
-  AuthenticatedSuccessAction
+  SignUpAction
 } from "./user.actions";
+import { Router } from "../../../node_modules/@angular/router";
 
 @Injectable()
 export class UserEffects {
-  constructor(private actions: Actions, private userService: UserService) {}
+  constructor(
+    private actions: Actions,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   @Effect()
   public authenticate: Observable<Action> = this.actions
@@ -53,19 +58,27 @@ export class UserEffects {
     .ofType(ActionTypes.AUTHENTICATED)
     .map((action: AuthenticatedAction) => action.payload)
     .switchMap(payload => {
-      return this.userService
-        .authenticatedUser()
-        .pipe(
-          map(
-            user =>
-              new AuthenticatedSuccessAction({
-                authenticated: user !== null,
-                user
-              }),
-            catchError(error =>
-              of(new AuthenticationErrorAction({ error: error }))
-            )
+      return this.userService.authenticatedUser().pipe(
+        map(
+          user =>
+            new AuthenticatedSuccessAction({
+              authenticated: user !== null,
+              user
+            }),
+          catchError(error =>
+            of(new AuthenticationErrorAction({ error: error }))
           )
-        );
+        )
+      );
     });
+
+  @Effect({ dispatch: false })
+  public authenticationRedirect = this.actions
+    .ofType(ActionTypes.AUTHENTICATION_REDIRECT)
+    .pipe(
+      tap(() => {
+        console.log("Navigating:");
+        this.router.navigate(["/user/signin"]);
+      })
+    );
 }
