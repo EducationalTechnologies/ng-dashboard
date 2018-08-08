@@ -8,11 +8,11 @@ import {
 import { UserService } from "../../core/services/user.service";
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.css']
+  selector: 'app-signin-page',
+  templateUrl: './signin-page.component.html',
+  styleUrls: ['./signin-page.component.css']
 })
-export class LoginPageComponent implements OnInit {
+export class SignInPageComponent implements OnInit {
 
   loginForm: FormGroup;
   isSubmitting = false;

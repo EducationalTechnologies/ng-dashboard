@@ -1,7 +1,7 @@
 import {
     DashboardActionTypes,
     DashboardActionsUnion,
-} from './../actions/dashboard.actions';
+} from '../actions/dashboard.actions';
 
 import { DashboardPage, DashboardPageRow } from '../models/dashboard';
 

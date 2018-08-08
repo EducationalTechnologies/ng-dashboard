@@ -1,7 +1,7 @@
 import {
     DashboardActionTypes,
     DashboardActionsUnion,
-} from './../actions/dashboard.actions';
+} from '../actions/dashboard.actions';
 import { Widget } from '../models/dashboard';
 
 export interface State {

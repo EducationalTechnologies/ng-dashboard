@@ -5,7 +5,9 @@ export const ActionTypes = {
   AUTHENTICATE: "[user] Authenticate",
   AUTHENTICATION_SUCCESS: "[user] Authentication success",
   AUTHENTICATION_ERROR: "[user] Authentication error",
+  AUTHENTICATION_REDIRECT: "[user] Authentication redirect",
   AUTHENTICATED: "[user] Authenticated",
+  AUTHENTICATED_SUCCESS: "[user] Authenticated Success",
   SIGN_OUT: "[user] Sign out",
   SIGNED_OUT: "[user] Signed out",
   SIGN_UP: "[user] Sign up",
@@ -18,7 +20,7 @@ export class AuthenticateAction implements Action {
   constructor(public payload: { email: string; password: string }) {}
 }
 
-export class AuthenticationSucessAction implements Action {
+export class AuthenticationSuccessAction implements Action {
   public readonly type: string = ActionTypes.AUTHENTICATION_SUCCESS;
 
   constructor(public payload: { user: User }) {}
@@ -30,10 +32,22 @@ export class AuthenticationErrorAction implements Action {
   constructor(public payload?: any) {}
 }
 
+export class AuthenticationRedirectAction implements Action {
+    public readonly type = ActionTypes.AUTHENTICATION_REDIRECT;
+
+    constructor(public payload?: any) {}
+}
+
 export class AuthenticatedAction implements Action {
   public readonly type: string = ActionTypes.AUTHENTICATED;
 
   constructor(public payload?: { token?: string }) {}
+}
+
+export class AuthenticatedSuccessAction implements Action {
+  public readonly type: string = ActionTypes.AUTHENTICATED_SUCCESS;
+
+  constructor(public payload: { authenticated: boolean; user: User }) {}
 }
 
 export class SignOutAction implements Action {
@@ -61,9 +75,11 @@ export class SignedUpAction implements Action {
 
 export type Actions =
   | AuthenticateAction
-  | AuthenticationSucessAction
+  | AuthenticationSuccessAction
   | AuthenticationErrorAction
+  | AuthenticationRedirectAction
   | AuthenticatedAction
+  | AuthenticatedSuccessAction
   | SignOutAction
   | SignedOutAction
   | SignUpAction

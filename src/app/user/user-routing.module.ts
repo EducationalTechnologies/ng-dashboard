@@ -6,14 +6,14 @@ import { TimelinePageComponent } from "./pages/timeline-page.component";
 import { PrivacySettingsPageComponent } from "./pages/privacy-settings-page.component";
 import { LoginSelectionPageComponent } from "./pages/login-selection-page.component";
 import { SignupPageComponent } from "./pages/signup-page.component";
-import { LoginPageComponent } from "./pages/login-page.component";
+import { SignInPageComponent } from "./pages/signin-page.component";
 
 const routes: Routes = [
   { path: "", component: SettingsPageComponent },
   { path: "consent", component: ConsentPageComponent },
   { path: "timeline", component: TimelinePageComponent },
   { path: "settings/privacy", component: PrivacySettingsPageComponent },
-  { path: "login", component: LoginPageComponent },
+  { path: "signin", component: SignInPageComponent },
   { path: "signup", component: SignupPageComponent }
 ];
 

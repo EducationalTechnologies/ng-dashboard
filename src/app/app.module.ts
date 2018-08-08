@@ -14,6 +14,8 @@ import { DashboardModule } from "./dashboard/dashboard.module";
 import { StoreRouterConnectingModule, routerReducer } from "@ngrx/router-store";
 import { VizModule } from "./viz/viz.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AuthenticationGuard } from "./shared/authentication.guard";
+import { UserService } from "./core/services/user.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -35,6 +37,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     StoreRouterConnectingModule.forRoot({
       stateKey: "router" // name of reducer key
     })
+  ],
+  providers: [
+    AuthenticationGuard,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

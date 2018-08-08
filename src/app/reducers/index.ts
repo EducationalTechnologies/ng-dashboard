@@ -41,6 +41,8 @@ export const getAuthenticatedUser = createSelector(
   user.getAuthenticatedUser
 );
 
+export const isAuthenticated = createSelector(getUserState, user.isAuthenticated);
+
 export const getCurrentUrl = createSelector(
   getRouterState,
   (state: fromRouter.RouterReducerState) => state.state.url

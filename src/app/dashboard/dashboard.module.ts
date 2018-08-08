@@ -11,7 +11,7 @@ import { reducers } from './reducers';
 import { TestComponent } from './pages/test/test.component';
 import { DashboardRowComponent } from './components/dashboard-row/dashboard-row.component';
 import { DashboardColumnComponent } from './components/dashboard-column/dashboard-column.component';
-import { NgAdminLteModule } from '../../../node_modules/ng-admin-lte';
+import { NgAdminLteModule } from 'ng-admin-lte';
 import { SidebarPagesMenuComponent } from './components/sidebar-pages-menu/sidebar-pages-menu.component';
 import { PageResolver } from './routing/page-resolver';
 import { DashboardMainPageComponent } from './pages/dashboard-main-page/dashboard-main-page.component';

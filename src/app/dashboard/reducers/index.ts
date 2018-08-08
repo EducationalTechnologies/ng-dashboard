@@ -10,7 +10,7 @@ import * as fromDashboard from './dashboard.page.reducer';
 import * as fromWidget from './widget.reducer';
 
 import { DashboardPage, Widget } from '../models/dashboard';
-import { map } from '../../../../node_modules/rxjs-compat/operator/map';
+import { map } from 'rxjs-compat/operator/map';
 
 export interface DashboardState {
     pages: fromDashboard.State;
