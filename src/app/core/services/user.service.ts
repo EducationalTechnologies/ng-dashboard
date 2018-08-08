@@ -31,8 +31,8 @@ export class UserService {
     return of(this._isLoggedIn);
   }
 
-  signIn(credentials): Observable<User> {
-    return this.apiService.post("/users/login", { user: credentials }).pipe(
+  signIn(email: string, password: string): Observable<User> {
+    return this.apiService.post("/users/login", { email, password }).pipe(
       map(data => {
         this._isLoggedIn = true;
         return data;

@@ -21,6 +21,13 @@ export function reducer(state: any = initialState, action: Actions): State {
         loading: true
       });
 
+    case ActionTypes.AUTHENTICATION_ERROR:
+      return Object.assign({}, state, {
+          authenticated: false,
+          error: action.payload.error.message,
+          loading: false
+      });
+
     case ActionTypes.AUTHENTICATED:
     case ActionTypes.SIGNED_UP:
       return Object.assign({}, state, {
