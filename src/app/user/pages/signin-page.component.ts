@@ -33,10 +33,12 @@ export class SignInPageComponent implements OnInit {
     this.isSubmitting = true;
     const credentials = this.loginForm.value;
     console.log("Submitting Signup with credentials: ", credentials);
-    this.userService.signUp(credentials).subscribe(
-      data => console.log("SIGN UP: ", data),
+    const email = this.loginForm.controls["email"].value;
+    const password = this.loginForm.controls["password"].value;
+    this.userService.signIn(email, password).subscribe(
+      data => console.log("SIGN IN: ", data),
       err => {
-        console.log("SIGN UP ERROR: ", err);
+        console.log("SIGN IN ERROR: ", err);
         this.isSubmitting = false;
       }
     );
