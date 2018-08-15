@@ -6,7 +6,7 @@ import { TimelinePageComponent } from "./pages/timeline-page.component";
 import { PrivacySettingsPageComponent } from "./pages/privacy-settings-page.component";
 import { SignupPageComponent } from "./pages/signup-page.component";
 import { SignInPageComponent } from "./pages/signin-page.component";
-import { AuthenticationGuard } from '../shared/authentication.guard';
+import { AuthenticationGuard } from '../core/services/authentication.guard';
 
 const routes: Routes = [
   { path: "", component: SettingsPageComponent },

@@ -33,7 +33,9 @@ export class SignupPageComponent implements OnInit {
     this.isSubmitting = true;
     const credentials = this.signupForm.value;
     console.log("Submitting Signup with credentials: ", credentials);
-    this.userService.signUp(credentials).subscribe(
+    const email = this.signupForm.controls["email"].value;
+    const password = this.signupForm.controls["password"].value;
+    this.userService.signUp(email, password).subscribe(
       data => console.log("SIGN UP: ", data),
       err => {
         console.log("SIGN UP ERROR: ", err);

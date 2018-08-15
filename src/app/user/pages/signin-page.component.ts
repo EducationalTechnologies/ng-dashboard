@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, isDevMode } from "@angular/core";
 import {
   FormBuilder,
   FormGroup,
@@ -6,14 +6,14 @@ import {
   Validators
 } from "@angular/forms";
 import { UserService } from "../../core/services/user.service";
+import { environment } from "../../../environments/environment";
 
 @Component({
-  selector: 'app-signin-page',
-  templateUrl: './signin-page.component.html',
-  styleUrls: ['./signin-page.component.css']
+  selector: "app-signin-page",
+  templateUrl: "./signin-page.component.html",
+  styleUrls: ["./signin-page.component.css"]
 })
 export class SignInPageComponent implements OnInit {
-
   loginForm: FormGroup;
   isSubmitting = false;
 
@@ -23,11 +23,16 @@ export class SignInPageComponent implements OnInit {
   ) {
     this.loginForm = this.formBuilder.group({
       email: ["", Validators.required],
-      password: ["", Validators.required],
+      password: ["", Validators.required]
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (isDevMode()) {
+      this.loginForm.controls["email"].setValue("a@b.de");
+      this.loginForm.controls["password"].setValue("1234");
+    }
+  }
 
   submitForm() {
     this.isSubmitting = true;
@@ -43,5 +48,4 @@ export class SignInPageComponent implements OnInit {
       }
     );
   }
-
 }

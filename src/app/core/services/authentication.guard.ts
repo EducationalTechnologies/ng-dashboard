@@ -9,9 +9,9 @@ import { Observable } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { map, take } from "rxjs/operators";
 
-import { isAuthenticated, State } from "../reducers";
+import { isAuthenticated, State } from "../../reducers";
 
-import * as AuthActions from "../user/user.actions";
+import * as AuthActions from "../../user/user.actions";
 
 @Injectable({
   providedIn: "root"

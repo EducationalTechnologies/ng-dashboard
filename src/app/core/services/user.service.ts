@@ -18,8 +18,8 @@ export class UserService {
 
   constructor(private apiService: ApiService) {}
 
-  signUp(credentials): Observable<User> {
-    return this.apiService.post("/users/signup", { user: credentials }).pipe(
+  signUp(email: string, password: string): Observable<User> {
+    return this.apiService.post("/users/signup", { email, password }).pipe(
       map(data => {
         return data;
       })
