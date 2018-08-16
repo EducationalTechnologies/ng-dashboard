@@ -40,6 +40,7 @@ export class UserService {
     // TOOD: replace with fetch to end session
     return of(true);
   }
+
   public authenticated(): Observable<boolean> {
     return of(this._isLoggedIn);
   }
