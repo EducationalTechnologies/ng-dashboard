@@ -7,6 +7,7 @@ import {
 } from "@angular/common/http";
 import { Consent } from "../models/consent";
 import { catchError } from "rxjs/operators";
+import { User } from "../models/user";
 
 const consentData = {
   introduction: [
@@ -84,24 +85,13 @@ export class ConsentService {
     // return this.httpClient.get<Consent>(url, httpOptions);
   }
 
-  setConsent(userId: string, consent: Consent) {
-    const url = this.API_PATH + `/users/${userId}/consent`;
+  setConsent(user: User, consent: Consent): Observable<any> {
+    const url = this.API_PATH + `/users/${user.id}/consent`;
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
     };
-    this.httpClient.post<Consent>(url, consent, httpOptions).subscribe(
-      res => {
-        console.log("Post Response Data : ", res);
-      },
-      (err: HttpErrorResponse) => {
-        if (err.error instanceof Error) {
-          console.log("Client-side error occured:", err);
-        } else {
-          console.log("Server-side error occured:", err);
-        }
-      }
-    );
+    return this.httpClient.post<Consent>(url, consent, httpOptions);
   }
 }

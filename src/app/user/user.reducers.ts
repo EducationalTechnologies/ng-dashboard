@@ -1,17 +1,20 @@
 import { Actions, ActionTypes } from "./user.actions";
 
 import { User } from "./models/user";
+import { Consent } from "./models/consent";
 
 export interface State {
   authenticated: boolean;
   loading: boolean;
   user: User;
+  consent: Consent;
 }
 
 const initialState: State = {
   loading: false,
   authenticated: false,
-  user: null
+  user: null,
+  consent: null
 };
 
 export function reducer(state: any = initialState, action: Actions): State {
@@ -28,12 +31,17 @@ export function reducer(state: any = initialState, action: Actions): State {
         loading: false
       });
 
-    case ActionTypes.AUTHENTICATION_SUCCESS:
+    case ActionTypes.CONSENT_SUBMITTED_SUCCESS:
+      return Object.assign({}, state, {
+        consent: action.payload.consent
+      });
+
+    case ActionTypes.AUTHENTICATED_SUCCESS:
     case ActionTypes.SIGNED_UP:
       return Object.assign({}, state, {
         loading: true,
         authenticated: true,
-        user: action.payload
+        user: action.payload.user
       });
 
     case ActionTypes.SIGN_UP:
@@ -59,5 +67,7 @@ export function reducer(state: any = initialState, action: Actions): State {
 export const isAuthenticated = (state: State) => state.authenticated;
 
 export const getAuthenticatedUser = (state: State) => state.user;
+
+export const getConsent = (state: State) => state.consent;
 
 export const isLoading = (state: State) => state.loading;

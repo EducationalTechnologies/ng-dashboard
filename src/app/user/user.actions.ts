@@ -1,5 +1,6 @@
 import { Action } from "@ngrx/store";
 import { User } from "./models/user";
+import { Consent } from "./models/consent";
 
 export const ActionTypes = {
   AUTHENTICATE: "[user] Authenticate",
@@ -11,7 +12,13 @@ export const ActionTypes = {
   SIGN_OUT: "[user] Sign out",
   SIGNED_OUT: "[user] Signed out",
   SIGN_UP: "[user] Sign up",
-  SIGNED_UP: "[user] Signed up"
+  SIGNED_UP: "[user] Signed up",
+  CONSENT_SUBMIT: "[user] Consent Submit",
+  CONSENT_SUBMITTED_SUCCESS: "[user] Consent Submitted Success",
+  CONSENT_SUBMITTED_ERROR: "[user] Consent Submitted Error",
+  CONSENT_RETRIEVE: "[user] Consent Retrieve",
+  CONSENT_RETRIEVE_SUCCESS: "[user] Consent Retrieve Success",
+  CONSENT_RETRIEVE_ERROR: "[user] Consent Retrieve Error"
 };
 
 export class AuthenticateAction implements Action {
@@ -33,9 +40,9 @@ export class AuthenticationErrorAction implements Action {
 }
 
 export class AuthenticationRedirectAction implements Action {
-    public readonly type = ActionTypes.AUTHENTICATION_REDIRECT;
+  public readonly type = ActionTypes.AUTHENTICATION_REDIRECT;
 
-    constructor(public payload?: any) {}
+  constructor(public payload?: any) {}
 }
 
 export class AuthenticatedAction implements Action {
@@ -73,6 +80,36 @@ export class SignedUpAction implements Action {
   constructor(public payload: { user: User }) {}
 }
 
+export class ConsentSubmitAction implements Action {
+  public readonly type = ActionTypes.CONSENT_SUBMIT;
+  constructor(public payload: { user: User; consent: Consent }) {}
+}
+
+export class ConsentSubmitSuccessAction implements Action {
+  public readonly type = ActionTypes.CONSENT_SUBMITTED_SUCCESS;
+  constructor(public payload: { consent: Consent }) {}
+}
+
+export class ConsentSubmitErrorAction implements Action {
+  public readonly type = ActionTypes.CONSENT_SUBMITTED_SUCCESS;
+  constructor(public payload?: any) {}
+}
+
+export class ConsentRetrieveAction implements Action {
+  public readonly type = ActionTypes.CONSENT_RETRIEVE;
+  constructor(public payload: { user: User }) {}
+}
+
+export class ConsentRetrieveSuccessAction implements Action {
+  public readonly type = ActionTypes.CONSENT_RETRIEVE_SUCCESS;
+  constructor(public payload: { consent: Consent }) {}
+}
+
+export class ConsentRetrieveErrorAction implements Action {
+  public readonly type = ActionTypes.CONSENT_RETRIEVE_SUCCESS;
+  constructor(public payload?: any) {}
+}
+
 export type Actions =
   | AuthenticateAction
   | AuthenticationSuccessAction
@@ -80,6 +117,12 @@ export type Actions =
   | AuthenticationRedirectAction
   | AuthenticatedAction
   | AuthenticatedSuccessAction
+  | ConsentSubmitAction
+  | ConsentSubmitSuccessAction
+  | ConsentSubmitErrorAction
+  | ConsentRetrieveAction
+  | ConsentRetrieveSuccessAction
+  | ConsentRetrieveErrorAction
   | SignOutAction
   | SignedOutAction
   | SignUpAction
