@@ -3,11 +3,13 @@
     <h1>
       Informed Consent
     </h1>
+    TODO: Remove this:
+    {{consentObservable | async | json}}
     <div class="text-center">
       <p class="lead" *ngIf="loading">Loading...</p>
     </div>
     <div class="grid-container">
-      <div class="consent-form" *ngIf="consent">
+      <div class="consent-form" *ngIf="consentObservable | async">
         <form [formGroup]="consentForm" (ngSubmit)="onSubmit()">
           <mat-card class="dashboard-card">
             <mat-card-header>
@@ -41,7 +43,11 @@
                 </div>
               </mat-expansion-panel>
               <mat-card-actions>
-                <mat-checkbox formControlName="hasReadIntroduction" class="consent-form-control" name="checkboxIntroduction" required>
+                <mat-checkbox 
+
+                formControlName="hasReadIntroduction" 
+                class="consent-form-control" 
+                name="checkboxIntroduction" required>
                   <b class="consent-form-control">
                     I understand that I can choose not to opt-in into the collection of data and that I will suffer no disadvantages from doing
                     so

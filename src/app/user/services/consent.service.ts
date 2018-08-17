@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, isDevMode } from "@angular/core";
 import { Observable, of } from "rxjs";
 import {
   HttpClient,
@@ -6,12 +6,13 @@ import {
   HttpErrorResponse
 } from "@angular/common/http";
 import { Consent } from "../models/consent";
-import { catchError } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { User } from "../models/user";
 import { Router } from "../../../../node_modules/@angular/router";
 import { getAuthenticatedUser, State } from "../../reducers";
 import { Store } from "@ngrx/store";
-import { ApiService } from "../../core/services";
+import { ApiService, UserService } from "../../core/services";
+import { MOCK_USER } from "../../core/services/user.service";
 
 const consentData = {
   introduction: [
@@ -63,8 +64,6 @@ const consentData = {
   providedIn: "root"
 })
 export class ConsentService {
-  private API_PATH = "http://localhost:3000/api";
-
   constructor(
     private apiService: ApiService,
     private httpClient: HttpClient,
@@ -81,6 +80,10 @@ export class ConsentService {
     this.store.select(getAuthenticatedUser).subscribe(u => {
       console.log("Consent Service found authenticated User: ", u);
       this.user = u;
+
+      if (!this.user && isDevMode()) {
+        this.user = MOCK_USER;
+      }
     });
   }
 
@@ -88,28 +91,25 @@ export class ConsentService {
     return this.consentData;
   }
 
-  getConsent(userId: string): Observable<Consent> {
-    console.log("Obtaining Consent for " + userId);
-    const url = this.API_PATH + `/users/${userId}/consent`;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Access-Control-Allow-Origin": "*"
-      })
-    };
-    return this.httpClient.get(url).map((res: Consent) => {
-      console.log("HTTP CLIENT GET: ", res);
-      return new Consent(res.consented, res.consentItems);
-    });
-    // return this.httpClient.get<Consent>(url, httpOptions);
+  getConsent(): Observable<Consent> {
+    if (this.user) {
+      console.log("Obtaining Consent for " + this.user.id);
+      const url = `/users/${this.user.id}/consent`;
+      return this.apiService.get(url).pipe(
+        map(data => {
+          return data;
+        })
+      );
+    }
   }
 
-  setConsent(user: User, consent: Consent): Observable<any> {
-    const url = this.API_PATH + `/users/${user.id}/consent`;
-    const httpOptions = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json"
-      })
-    };
-    return this.httpClient.post<Consent>(url, consent, httpOptions);
+  setConsent(consent: Consent): Observable<any> {
+    const url = `/users/${this.user.id}/consent`;
+
+    return this.apiService.post(url, consent).pipe(
+      map(response => {
+        return response;
+      }
+    ));
   }
 }

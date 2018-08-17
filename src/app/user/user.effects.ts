@@ -25,7 +25,10 @@ import {
   SignedOutAction,
   SignedUpAction,
   SignOutAction,
-  SignUpAction
+  SignUpAction,
+  ConsentRetrieveAction,
+  ConsentRetrieveSuccessAction,
+  ConsentRetrieveErrorAction
 } from "./user.actions";
 import { Router } from "../../../node_modules/@angular/router";
 import { ConsentService } from "./services/consent.service";
@@ -56,31 +59,20 @@ export class UserEffects {
         );
     });
 
-  @Effect()
-  public authenticated: Observable<Action> = this.actions
+  @Effect({ dispatch: false })
+  public authenticatedSuccess = this.actions
     .ofType(ActionTypes.AUTHENTICATION_SUCCESS)
-    .map((action: AuthenticationSuccessAction) => action.payload)
-    .switchMap(payload => {
-      return this.userService.authenticatedUser().pipe(
-        map(
-          user =>
-            new AuthenticatedSuccessAction({
-              authenticated: user !== null,
-              user
-            }),
-          catchError(error =>
-            of(new AuthenticationErrorAction({ error: error }))
-          )
-        )
-      );
-    });
+    .pipe(
+      tap(() => {
+        this.router.navigate(["/courses"]);
+      })
+    );
 
   @Effect({ dispatch: false })
   public authenticationRedirect = this.actions
     .ofType(ActionTypes.AUTHENTICATION_REDIRECT)
     .pipe(
       tap(() => {
-        console.log("Navigating:");
         this.router.navigate(["/user/signin"]);
       })
     );
@@ -90,9 +82,19 @@ export class UserEffects {
     .ofType(ActionTypes.CONSENT_SUBMIT)
     .map((action: ConsentSubmitAction) => action.payload)
     .switchMap(payload => {
-      return this.consentService.setConsent(payload.user, payload.consent).pipe(
+      return this.consentService.setConsent(payload.consent).pipe(
         map(() => new ConsentSubmitSuccessAction({ consent: payload.consent })),
         catchError(error => of(new ConsentSubmitErrorAction({ error: error })))
+      );
+    });
+
+  @Effect()
+  public consentRetrieve: Observable<Action> = this.actions
+    .ofType(ActionTypes.CONSENT_RETRIEVE)
+    .switchMap(() => {
+      return this.consentService.getConsent().pipe(
+        map(consent => new ConsentRetrieveSuccessAction({ consent: consent })),
+        catchError(error => of(new ConsentRetrieveErrorAction({ error })))
       );
     });
 }

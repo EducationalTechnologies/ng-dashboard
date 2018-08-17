@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef
+} from "@angular/core";
 import { Consent } from "../models/consent";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ConsentService } from "../services/consent.service";
@@ -13,7 +19,7 @@ import { ConsentSubmitAction, ConsentRetrieveAction } from "../user.actions";
   templateUrl: "./consent-page.component.html",
   styleUrls: ["./consent-page.component.css"]
 })
-export class ConsentPageComponent implements OnInit {
+export class ConsentPageComponent implements OnInit, OnDestroy {
   loading = false;
   consentForm: FormGroup;
   consentData: any;
@@ -24,6 +30,8 @@ export class ConsentPageComponent implements OnInit {
   consentFormWrapper: ElementRef;
   @ViewChild("termsAndConditions")
   termsAndConditions: ElementRef;
+
+  consentObservable: Observable<Consent> = null;
 
   ngOnInit() {
     this.consentForm = new FormGroup({
@@ -36,15 +44,15 @@ export class ConsentPageComponent implements OnInit {
       consentArs: new FormControl(false)
     });
 
-    this.store.select(getAuthenticatedUser).subscribe(u => {
-      this.user = u;
-      this.store.dispatch(new ConsentRetrieveAction({ user: this.user }));
-    });
+    this.store.dispatch(new ConsentRetrieveAction());
 
     this.store.select(getConsent).subscribe(c => {
       console.log("THIS CONSENT: ", c);
       this.consent = c;
+      // this.consentForm.patchValue(this.consent);
     });
+
+    this.consentObservable = this.store.select(getConsent);
 
     this.loading = true;
 
@@ -54,6 +62,8 @@ export class ConsentPageComponent implements OnInit {
         "Water spinach arugula pea tatsoi aubergine spring onion bush tomato kale radicchio turnip chicory salsify pea sprouts fava bean";
     }
   }
+
+  ngOnDestroy(): void {}
 
   constructor(
     private consentDataService: ConsentService,
@@ -65,9 +75,12 @@ export class ConsentPageComponent implements OnInit {
   }
 
   onSubmit() {
-    // this.consentDataService.setConsent("Daniel", this.consent);
+    const submitConsent = new Consent(true, this.consent.consentItems);
+
+    console.log(this.consentForm);
+
     this.store.dispatch(
-      new ConsentSubmitAction({ user: this.user, consent: this.consent })
+      new ConsentSubmitAction({ consent: submitConsent })
     );
   }
 }

@@ -75,7 +75,7 @@ export class SignedUpAction implements Action {
 
 export class ConsentSubmitAction implements Action {
   public readonly type = ActionTypes.CONSENT_SUBMIT;
-  constructor(public payload: { user: User; consent: Consent }) {}
+  constructor(public payload: { consent: Consent }) {}
 }
 
 export class ConsentSubmitSuccessAction implements Action {

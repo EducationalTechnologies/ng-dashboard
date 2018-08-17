@@ -20,6 +20,7 @@ const initialState: State = {
 export function reducer(state: any = initialState, action: Actions): State {
   switch (action.type) {
     case ActionTypes.AUTHENTICATE:
+    case ActionTypes.CONSENT_RETRIEVE:
       return Object.assign({}, state, {
         loading: true
       });
@@ -31,19 +32,24 @@ export function reducer(state: any = initialState, action: Actions): State {
         loading: false
       });
 
+    case ActionTypes.CONSENT_RETRIEVE_SUCCESS:
+      return Object.assign({}, state, {
+        consent: action.payload.consent
+      });
+
     case ActionTypes.CONSENT_SUBMITTED_SUCCESS:
       return Object.assign({}, state, {
         consent: action.payload.consent
       });
 
-    case ActionTypes.AUTHENTICATED_SUCCESS:
     case ActionTypes.SIGNED_UP:
+    case ActionTypes.AUTHENTICATION_SUCCESS:
       return Object.assign({}, state, {
         loading: true,
         authenticated: true,
         user: action.payload.user
       });
-    case ActionTypes.AUTHENTICATION_SUCCESS:
+    case ActionTypes.AUTHENTICATED_SUCCESS:
       return Object.assign({}, state, {
         loading: false
       });
