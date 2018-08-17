@@ -11,6 +11,7 @@ import { environment } from "../../../environments/environment";
 import { isAuthenticated, State } from "../../reducers";
 import { Store } from "@ngrx/store";
 import { Router } from "../../../../node_modules/@angular/router";
+import { AuthenticateAction } from "../user.actions";
 @Component({
   selector: "app-signin-page",
   templateUrl: "./signin-page.component.html",
@@ -39,7 +40,8 @@ export class SignInPageComponent implements OnDestroy, OnInit {
       this.loginForm.controls["password"].setValue("1234");
     }
 
-    this.store.select(isAuthenticated)
+    this.store
+      .select(isAuthenticated)
       .takeWhile(() => this.alive)
       .subscribe(value => {
         console.log("User authenticated, navigating to home");
@@ -57,6 +59,14 @@ export class SignInPageComponent implements OnDestroy, OnInit {
     console.log("Submitting Signup with credentials: ", credentials);
     const email = this.loginForm.controls["email"].value;
     const password = this.loginForm.controls["password"].value;
+
+    const payload = {
+      email,
+      password
+    };
+
+    this.store.dispatch(new AuthenticateAction(payload));
+
     this.userService.signIn(email, password).subscribe(
       data => {
         console.log("SIGN IN: ", data);
