@@ -66,7 +66,6 @@ const consentData = {
 export class ConsentService {
   constructor(
     private apiService: ApiService,
-    private httpClient: HttpClient,
     private store: Store<State>
   ) {
     this.init();
@@ -93,7 +92,6 @@ export class ConsentService {
 
   getConsent(): Observable<Consent> {
     if (this.user) {
-      console.log("Obtaining Consent for " + this.user.id);
       const url = `/users/${this.user.id}/consent`;
       return this.apiService.get(url).pipe(
         map(data => {
@@ -104,10 +102,11 @@ export class ConsentService {
   }
 
   setConsent(consent: Consent): Observable<any> {
+    console.log("Setting Consent");
     const url = `/users/${this.user.id}/consent`;
-
     return this.apiService.post(url, consent).pipe(
       map(response => {
+        console.log("Received Response to Setting Consent: ", response);
         return response;
       }
     ));

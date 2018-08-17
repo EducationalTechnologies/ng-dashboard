@@ -20,6 +20,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { UserEffects } from "./user.effects";
 import { reducer } from './user.reducers';
+import { ReactiveFormsModule} from "@angular/forms";
 @NgModule({
   imports: [
     CommonModule,
@@ -29,8 +30,8 @@ import { reducer } from './user.reducers';
     MaterialModule,
     CoreModule,
     StoreModule.forFeature('user', reducer),
-    // EffectsModule.forRoot([]),
     EffectsModule.forFeature([UserEffects]),
+    ReactiveFormsModule
   ],
   declarations: [
     SettingsPageComponent,
