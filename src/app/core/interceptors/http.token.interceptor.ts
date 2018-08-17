@@ -12,7 +12,8 @@ import { JwtService } from "../services";
 // From: github/gothinkster/angular-realworld-example-app?file=src%2Fapp%2Fcore%2Finterceptors%2Fhttp.token.interceptor.ts
 @Injectable()
 export class HttpTokenInterceptor implements HttpInterceptor {
-  constructor(private jwtService: JwtService) {}
+  constructor(private jwtService: JwtService) {
+  }
 
   intercept(
     req: HttpRequest<any>,
@@ -28,7 +29,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     if (token) {
       headersConfig["Authorization"] = `Token ${token}`;
     }
-
+    console.log("intercepted http request, appended token");
     const request = req.clone({ setHeaders: headersConfig });
     return next.handle(request);
   }

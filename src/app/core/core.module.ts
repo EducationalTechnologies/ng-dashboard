@@ -6,6 +6,8 @@ import { DashboardService } from "./services/dashboard.service";
 import { UserService } from "./services/user.service";
 import { ApiService } from "./services/api.service";
 import { JwtService } from "./services/jwt.service";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpTokenInterceptor } from "./interceptors/http.token.interceptor";
 
 export const COMPONENTS = [];
 
@@ -19,6 +21,11 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: HttpTokenInterceptor,
+          multi: true
+        },
         CourseService,
         DashboardService,
         UserService,

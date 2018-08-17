@@ -41,7 +41,12 @@ export const getAuthenticatedUser = createSelector(
   user.getAuthenticatedUser
 );
 
-export const isAuthenticated = createSelector(getUserState, user.isAuthenticated);
+export const getConsent = createSelector(getUserState, user.getConsent);
+
+export const isAuthenticated = createSelector(
+  getUserState,
+  user.isAuthenticated
+);
 
 export const getCurrentUrl = createSelector(
   getRouterState,

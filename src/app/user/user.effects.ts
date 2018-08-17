@@ -20,18 +20,23 @@ import {
   AuthenticationSuccessAction,
   AuthenticationErrorAction,
   AuthenticatedAction,
+  ConsentSubmitAction,
+  ConsentSubmitErrorAction,
+  ConsentSubmitSuccessAction,
   SignedOutAction,
   SignedUpAction,
   SignOutAction,
   SignUpAction
 } from "./user.actions";
 import { Router } from "../../../node_modules/@angular/router";
+import { ConsentService } from "./services/consent.service";
 
 @Injectable()
 export class UserEffects {
   constructor(
     private actions: Actions,
     private userService: UserService,
+    private consentService: ConsentService,
     private router: Router
   ) {}
 
@@ -81,4 +86,15 @@ export class UserEffects {
         this.router.navigate(["/user/signin"]);
       })
     );
+
+  @Effect()
+  public consentSubmitted: Observable<Action> = this.actions
+    .ofType(ActionTypes.CONSENT_SUBMIT)
+    .map((action: ConsentSubmitAction) => action.payload)
+    .switchMap(payload => {
+      return this.consentService.setConsent(payload.user, payload.consent).pipe(
+        map(() => new ConsentSubmitSuccessAction({ consent: payload.consent })),
+        catchError(error => of(new ConsentSubmitErrorAction({ error: error })))
+      );
+    });
 }

@@ -3,6 +3,10 @@ import { Consent } from "../models/consent";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ConsentService } from "../services/consent.service";
 import { Observable } from "rxjs";
+import { Store } from "@ngrx/store";
+import { getConsent, State, getAuthenticatedUser } from "../../reducers";
+import { User } from "../models/user";
+import { ConsentSubmitAction, ConsentRetrieveAction } from "../user.actions";
 // import { LoggingService } from "../logging/logging.service";
 @Component({
   selector: "app-consent-page",
@@ -15,8 +19,11 @@ export class ConsentPageComponent implements OnInit {
   consentData: any;
   termsText: string;
   consent: Consent;
-  @ViewChild("consentFormWrapper") consentFormWrapper: ElementRef;
-  @ViewChild("termsAndConditions") termsAndConditions: ElementRef;
+  user: User;
+  @ViewChild("consentFormWrapper")
+  consentFormWrapper: ElementRef;
+  @ViewChild("termsAndConditions")
+  termsAndConditions: ElementRef;
 
   ngOnInit() {
     this.consentForm = new FormGroup({
@@ -28,22 +35,18 @@ export class ConsentPageComponent implements OnInit {
       ),
       consentArs: new FormControl(false)
     });
-    this.consentDataService.getConsentData().subscribe(data => {
-      this.consentData = data;
+
+    this.store.select(getAuthenticatedUser).subscribe(u => {
+      this.user = u;
+      this.store.dispatch(new ConsentRetrieveAction({ user: this.user }));
     });
 
-    const userId = "Daniel";
-    /*
-    this.consentDataService.getConsent(userId).subscribe(data => {
-        this.consent = new Consent(false, data.consentItems);
+    this.store.select(getConsent).subscribe(c => {
+      console.log("THIS CONSENT: ", c);
+      this.consent = c;
     });
-*/
+
     this.loading = true;
-    this.consentDataService.getConsent(userId).subscribe(data => {
-      this.loading = false;
-      this.consent = data;
-      console.log("THIS CONSENT: ", this.consent);
-    });
 
     for (let i = 0; i < 100; i++) {
       // tslint:disable-next-line:max-line-length
@@ -53,7 +56,8 @@ export class ConsentPageComponent implements OnInit {
   }
 
   constructor(
-    private consentDataService: ConsentService // private loggingService: LoggingService
+    private consentDataService: ConsentService,
+    private store: Store<State>
   ) {}
 
   onPanelExpanded(panelName: any) {
@@ -61,7 +65,9 @@ export class ConsentPageComponent implements OnInit {
   }
 
   onSubmit() {
-    this.consentDataService.setConsent("Daniel", this.consent);
-    // console.log("LOG: ", this.loggingService.getLog());
+    // this.consentDataService.setConsent("Daniel", this.consent);
+    this.store.dispatch(
+      new ConsentSubmitAction({ user: this.user, consent: this.consent })
+    );
   }
 }
