@@ -7,7 +7,6 @@ export const ActionTypes = {
   AUTHENTICATION_SUCCESS: "[user] Authentication success",
   AUTHENTICATION_ERROR: "[user] Authentication error",
   AUTHENTICATION_REDIRECT: "[user] Authentication redirect",
-  AUTHENTICATED: "[user] Authenticated",
   AUTHENTICATED_SUCCESS: "[user] Authenticated Success",
   SIGN_OUT: "[user] Sign out",
   SIGNED_OUT: "[user] Signed out",
@@ -43,12 +42,6 @@ export class AuthenticationRedirectAction implements Action {
   public readonly type = ActionTypes.AUTHENTICATION_REDIRECT;
 
   constructor(public payload?: any) {}
-}
-
-export class AuthenticatedAction implements Action {
-  public readonly type: string = ActionTypes.AUTHENTICATED;
-
-  constructor(public payload?: { token?: string }) {}
 }
 
 export class AuthenticatedSuccessAction implements Action {
@@ -97,7 +90,7 @@ export class ConsentSubmitErrorAction implements Action {
 
 export class ConsentRetrieveAction implements Action {
   public readonly type = ActionTypes.CONSENT_RETRIEVE;
-  constructor(public payload: { user: User }) {}
+  constructor(public payload?: { user: User }) {}
 }
 
 export class ConsentRetrieveSuccessAction implements Action {
@@ -115,7 +108,6 @@ export type Actions =
   | AuthenticationSuccessAction
   | AuthenticationErrorAction
   | AuthenticationRedirectAction
-  | AuthenticatedAction
   | AuthenticatedSuccessAction
   | ConsentSubmitAction
   | ConsentSubmitSuccessAction

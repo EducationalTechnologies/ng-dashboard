@@ -8,6 +8,10 @@ import {
 import { Consent } from "../models/consent";
 import { catchError } from "rxjs/operators";
 import { User } from "../models/user";
+import { Router } from "../../../../node_modules/@angular/router";
+import { getAuthenticatedUser, State } from "../../reducers";
+import { Store } from "@ngrx/store";
+import { ApiService } from "../../core/services";
 
 const consentData = {
   introduction: [
@@ -61,10 +65,24 @@ const consentData = {
 export class ConsentService {
   private API_PATH = "http://localhost:3000/api";
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private apiService: ApiService,
+    private httpClient: HttpClient,
+    private store: Store<State>
+  ) {
+    this.init();
+  }
 
   consentData: Observable<any> = of(consentData);
   consent: Consent;
+  user: User;
+
+  init() {
+    this.store.select(getAuthenticatedUser).subscribe(u => {
+      console.log("Consent Service found authenticated User: ", u);
+      this.user = u;
+    });
+  }
 
   getConsentData() {
     return this.consentData;

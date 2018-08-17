@@ -19,7 +19,6 @@ import {
   AuthenticatedSuccessAction,
   AuthenticationSuccessAction,
   AuthenticationErrorAction,
-  AuthenticatedAction,
   ConsentSubmitAction,
   ConsentSubmitErrorAction,
   ConsentSubmitSuccessAction,
@@ -43,7 +42,6 @@ export class UserEffects {
   @Effect()
   public authenticate: Observable<Action> = this.actions
     .ofType(ActionTypes.AUTHENTICATE)
-    .debounceTime(500)
     .map((action: AuthenticateAction) => action.payload)
     .switchMap(payload => {
       return this.userService
@@ -60,8 +58,8 @@ export class UserEffects {
 
   @Effect()
   public authenticated: Observable<Action> = this.actions
-    .ofType(ActionTypes.AUTHENTICATED)
-    .map((action: AuthenticatedAction) => action.payload)
+    .ofType(ActionTypes.AUTHENTICATION_SUCCESS)
+    .map((action: AuthenticationSuccessAction) => action.payload)
     .switchMap(payload => {
       return this.userService.authenticatedUser().pipe(
         map(

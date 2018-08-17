@@ -16,7 +16,10 @@ import { ConsentItemComponent } from './components/consent-item.component';
 import { LoginSelectionPageComponent } from './pages/login-selection-page.component';
 import { SignupPageComponent } from './pages/signup-page.component';
 import { SignInPageComponent } from './pages/signin-page.component';
-
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { UserEffects } from "./user.effects";
+import { reducer } from './user.reducers';
 @NgModule({
   imports: [
     CommonModule,
@@ -24,7 +27,10 @@ import { SignInPageComponent } from './pages/signin-page.component';
     UserRoutingModule,
     NgAdminLteModule,
     MaterialModule,
-    CoreModule
+    CoreModule,
+    StoreModule.forFeature('user', reducer),
+    // EffectsModule.forRoot([]),
+    EffectsModule.forFeature([UserEffects]),
   ],
   declarations: [
     SettingsPageComponent,

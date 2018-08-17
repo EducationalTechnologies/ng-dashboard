@@ -43,7 +43,10 @@ export function reducer(state: any = initialState, action: Actions): State {
         authenticated: true,
         user: action.payload.user
       });
-
+    case ActionTypes.AUTHENTICATION_SUCCESS:
+      return Object.assign({}, state, {
+        loading: false
+      });
     case ActionTypes.SIGN_UP:
     case ActionTypes.SIGN_OUT:
       return Object.assign({}, state, {
