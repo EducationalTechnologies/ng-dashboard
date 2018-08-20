@@ -75,12 +75,12 @@ export class ConsentPageComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    const submitConsent = new Consent(true, this.consent.consentItems);
+    // const submitConsent = //new Consent(true, this.consent.consentItems);
 
-    console.log(this.consentForm);
+    console.log(this.consent);
 
     this.store.dispatch(
-      new ConsentSubmitAction({ consent: submitConsent })
+      new ConsentSubmitAction({ consent: this.consent })
     );
   }
 }

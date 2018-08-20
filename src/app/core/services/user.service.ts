@@ -3,6 +3,7 @@ import { Observable, of } from "rxjs";
 import { User } from "../../user/models/user";
 import { ApiService } from "./api.service";
 import { map } from "rxjs/operators";
+import { JwtService } from "./jwt.service";
 
 export const MOCK_USER = new User();
 MOCK_USER.email = "d@b.de";
@@ -16,11 +17,18 @@ MOCK_USER.password = "password";
 export class UserService {
   private _isLoggedIn = false;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private jwtService: JwtService) {}
+
+  populate() {
+    if (this.jwtService.getToken()) {
+      this.apiService.get("/user/");
+    }
+  }
 
   signUp(email: string, password: string): Observable<User> {
     return this.apiService.post("/users/signup", { email, password }).pipe(
       map(data => {
+        this.jwtService.saveToken(data.user.token);
         return data;
       })
     );
@@ -29,6 +37,7 @@ export class UserService {
   signIn(email: string, password: string): Observable<User> {
     return this.apiService.post("/users/login", { email, password }).pipe(
       map(data => {
+        this.jwtService.saveToken(data.user.token);
         this._isLoggedIn = true;
         return data;
       })
