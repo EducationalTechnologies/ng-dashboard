@@ -21,6 +21,7 @@ import { StoreModule } from '@ngrx/store';
 import { UserEffects } from "./user.effects";
 import { reducer } from './user.reducers';
 import { ReactiveFormsModule} from "@angular/forms";
+import { ToolbarProfileComponent } from './components/toolbar-profile.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -42,7 +43,11 @@ import { ReactiveFormsModule} from "@angular/forms";
     ConsentItemComponent,
     LoginSelectionPageComponent,
     SignupPageComponent,
-    SignInPageComponent
+    SignInPageComponent,
+    ToolbarProfileComponent
+  ],
+  exports: [
+    ToolbarProfileComponent
   ],
   providers: [SettingsService, ConsentService, EventService]
 })

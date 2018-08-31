@@ -16,6 +16,7 @@ import { VizModule } from "./viz/viz.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AuthenticationGuard } from "./core/services/authentication.guard";
 import { UserService } from "./core/services/user.service";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { UserService } from "./core/services/user.service";
     BrowserModule,
     BrowserAnimationsModule,
     UserModule,
+    SharedModule,
     AppRoutingModule,
     HttpClientModule,
     DashboardModule,
@@ -38,10 +40,7 @@ import { UserService } from "./core/services/user.service";
       stateKey: "router" // name of reducer key
     })
   ],
-  providers: [
-    AuthenticationGuard,
-    UserService
-  ],
+  providers: [AuthenticationGuard, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

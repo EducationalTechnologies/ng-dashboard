@@ -12,8 +12,11 @@
         <a routerLink="/user/signin" class="nav-link">Login</a>
       </li>
     </ul>
+    <ul *appShowAuthed="true">
+      <app-toolbar-profile>
 
-
+      </app-toolbar-profile>
+    </ul>
   </lte-header>
 
   <lte-main-sidebar logo="../assets/images/TLA_Dashboard_Shield.png" brand="TRULA" link="">
