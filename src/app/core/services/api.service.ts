@@ -17,8 +17,9 @@ export class ApiService {
     this.headers = this.headers.set("Content-Type", "application/json; charset=utf-8");
   }
 
-  private formatErrors(error: any) {
-    return throwError(error.error);
+  private formatErrors(error: Response | any) {
+    // const body = error.json();
+    return Observable.throw(error);
   }
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {

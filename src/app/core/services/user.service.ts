@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { User } from "../../user/models/user";
 import { ApiService } from "./api.service";
-import { map } from "rxjs/operators";
+import { map, catchError } from "rxjs/operators";
 import { JwtService } from "./jwt.service";
 
 export const MOCK_USER = new User();
@@ -40,7 +40,7 @@ export class UserService {
         this.jwtService.saveToken(data.user.token);
         this._isLoggedIn = true;
         return data;
-      })
+      }),
     );
   }
 
