@@ -1,7 +1,7 @@
 
 
 <lte-content-row>
-    <div class="col-lg-12">
+    <div class="col-lg-12 mt-2">
         <lte-card title="My Courses">
             <lte-table>
                 <tr>
@@ -13,7 +13,7 @@
                   </tr>
                   <tr *ngFor="let course of courses$ | async" >
                       <td>{{course.id}}</td>
-                      <td>todo course title</td>
+                      <td (click)="openCourse(course.id)">{{course.title}}</td>
                       <td>
                         <div class="progress progress-xs">
                           <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
@@ -24,9 +24,5 @@
                     </tr>
             </lte-table>
           </lte-card>
-        
-            
-            
     </div>
   </lte-content-row>
-{{courses$|async|json}}

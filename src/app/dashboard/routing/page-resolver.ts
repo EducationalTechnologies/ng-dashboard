@@ -9,8 +9,6 @@ export class PageResolver implements Resolve<void> {
     constructor(private store: Store<fromDashboard.State>) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        // console.log("todo", "load", route.params.pageId)
-        
         this.store.dispatch(new DashboardActions.DRLoad(route.params.pageId));
     }
 }

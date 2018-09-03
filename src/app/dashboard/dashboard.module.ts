@@ -16,6 +16,7 @@ import { SidebarPagesMenuComponent } from './components/sidebar-pages-menu/sideb
 import { PageResolver } from './routing/page-resolver';
 import { DashboardMainPageComponent } from './pages/dashboard-main-page/dashboard-main-page.component';
 import {VizModule} from '../viz/viz.module';
+import { DashboardCourseComponent } from './pages/dashboard-course/dashboard-course.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,6 @@ import {VizModule} from '../viz/viz.module';
     SidebarPagesMenuComponent
   ],
   providers:[PageResolver],
-  declarations: [DashboardPageComponent, TestComponent, DashboardRowComponent, DashboardColumnComponent, SidebarPagesMenuComponent, DashboardMainPageComponent]
+  declarations: [DashboardPageComponent, TestComponent, DashboardRowComponent, DashboardColumnComponent, SidebarPagesMenuComponent, DashboardMainPageComponent, DashboardCourseComponent]
 })
 export class DashboardModule { }

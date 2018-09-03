@@ -12,13 +12,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./sidebar-pages-menu.component.css']
 })
 export class SidebarPagesMenuComponent implements OnInit {
-  private pages$ : Observable<DashboardPage[]>;
+  private pages$ : Observable<DashboardPage[]> = this.store.pipe(select(fromDashboard.selectPages));
 
   constructor(
     private store: Store<fromDashboard.State>
-  ) { 
-    this.pages$ = store.pipe(select(fromDashboard.selectPages));
-  }
+  ) { }
 
   ngOnInit() {
     this.store.dispatch(new DashboardActions.DPLoad());

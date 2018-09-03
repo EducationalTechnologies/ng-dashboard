@@ -27,9 +27,9 @@ export class DashboardPageComponent implements OnInit, OnChanges {
     private route: ActivatedRoute
   ) { 
     // this.w$ = store.pipe(select(fromDashboard.currentPageWithWidgets));
-    this.currentPage$ = store.pipe(select(fromDashboard.selectCurrentPage))
+    this.currentPage3$ = store.pipe(select(fromDashboard.selectCurrentPage))
     this.currentPage1$ = store.pipe(select(fromDashboard.selectWidgets))
-    this.currentPage2$ = store.pipe(select(fromDashboard.currentPageWithWidgets))
+    this.currentPage$ = store.pipe(select(fromDashboard.currentPageWithWidgets))
     this.currentPage3$ = store.pipe(select(fromApp.selectCurrentPageId))
   }
 

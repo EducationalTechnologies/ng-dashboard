@@ -35,7 +35,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
     VizModule,
     CoreModule.forRoot(),
     StoreDevtoolsModule.instrument({
-      name: 'NgRx Book Store DevTools',
+      name: 'NgRx TRULA Store DevTools',
       logOnly: environment.production,
     }),
     StoreRouterConnectingModule.forRoot({

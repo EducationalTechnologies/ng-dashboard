@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 
 import { CourseActionTypes } from '../../actions/course.actions';
 import { Course } from '../../models/course';
+import * as RouterActions from '../../../core/actions/router.actions'
 
 @Component({
   selector: 'app-course-page',
@@ -31,6 +32,10 @@ export class CoursePageComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(new CourseActions.Load());
 
+  }
+
+  openCourse(id: string){
+    this.store.dispatch(new RouterActions.OpenCourse(id))
   }
 
 }

@@ -43,3 +43,8 @@ export interface State {
     getRouterState,
     router => router.state.root.firstChild.firstChild.params.pageId
   );
+
+  export const selectCurrentCourseId = createSelector(
+    getRouterState,
+    router => router.state.root.firstChild.firstChild.params.courseId
+  );

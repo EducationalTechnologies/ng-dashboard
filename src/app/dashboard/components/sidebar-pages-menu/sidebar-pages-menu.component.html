@@ -1,5 +1,6 @@
 
   
+  
     <li *ngFor="let page of pages$|async" lte-menu-item [hasChildren]="false" 
             [title]="page.name" router="/dashboard/page/{{page.id}}"></li>
   

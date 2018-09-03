@@ -7,8 +7,8 @@ import { Course } from '../../course/models/course';
 
 @Injectable()
 export class CourseService {
-  private API_PATH = 'https://virtserver.swaggerhub.com/DIPF-EduTec/Dashboard/1.0.0/courses';
-
+  // private API_PATH = 'https://virtserver.swaggerhub.com/DIPF-EduTec/Dashboard/1.0.0/courses';
+  private API_PATH = 'http://localhost:3000/api/dashboard/courses';
   constructor(private http: HttpClient) {}
 
   list(): Observable<Course[]> {
