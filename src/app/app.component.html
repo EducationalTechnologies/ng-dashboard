@@ -11,24 +11,23 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a routerLink="/user/signin" class="nav-link">Login</a>
       </li>
-    </ul>
-    <ul *appShowAuthed="true">
-      <app-toolbar-profile>
-
-      </app-toolbar-profile>
-      <li>
-        Test Authed
+      <li 
+      class="nav-item d-none d-sm-inline-block"
+      *appShowAuthed="true">
+        <app-toolbar-profile>
+  
+        </app-toolbar-profile>
       </li>
     </ul>
   </lte-header>
 
   <lte-main-sidebar logo="../assets/images/TLA_Dashboard_Shield.png" brand="TRULA" link="">
     <li lte-menu-item [hasChildren]="false" title="Courses" router="/courses">
-      <li lte-menu-item [hasChildren]="true" title="Pages" router="/">
-        <ul ng-sidebar-pages-menu class="nav nav-treeview">
-        </ul>
-      </li>
-      <li lte-menu-item [hasChildren]="false" title="Privacy" router="/user"></li>
+    <li lte-menu-item [hasChildren]="true" title="Pages" router="/">
+      <ul ng-sidebar-pages-menu class="nav nav-treeview">
+      </ul>
+    </li>
+    <li lte-menu-item [hasChildren]="false" title="Privacy" router="/user"></li>
 
   </lte-main-sidebar>
   <div class="content-wrapper">

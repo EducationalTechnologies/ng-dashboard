@@ -39,7 +39,8 @@ export class UserService {
       map(data => {
         this.jwtService.saveToken(data.user.token);
         this._isLoggedIn = true;
-        return data;
+        console.log("After Sign In: ", data);
+        return data.user;
       }),
     );
   }

@@ -77,9 +77,7 @@ export class ConsentService {
 
   init() {
     this.store.select(getAuthenticatedUser).subscribe(u => {
-      console.log("Consent Service found authenticated User: ", u);
       this.user = u;
-
       if (!this.user && isDevMode()) {
         this.user = MOCK_USER;
       }

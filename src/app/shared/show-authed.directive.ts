@@ -31,7 +31,6 @@ export class ShowAuthedDirective implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.store
       .select(function(state) {
-        console.log("Init app show authed, state: " + state.user.authenticated);
         return state.user.authenticated;
       } )
       .subscribe(auth => this.renderElementOnAuthenticated(auth));
