@@ -19,7 +19,8 @@ export const ActionTypes = {
   CONSENT_SUBMITTED_ERROR: "[user] Consent Submitted Error",
   CONSENT_RETRIEVE: "[user] Consent Retrieve",
   CONSENT_RETRIEVE_SUCCESS: "[user] Consent Retrieve Success",
-  CONSENT_RETRIEVE_ERROR: "[user] Consent Retrieve Error"
+  CONSENT_RETRIEVE_ERROR: "[user] Consent Retrieve Error",
+  TOKEN_SESSION_LOGIN: "[user] Token Session Login"
 };
 
 export class AuthenticateAction implements Action {
@@ -66,6 +67,7 @@ export class SignOutSuccessAction implements Action {
 
 export class SignoutErrorAction implements Action {
   public readonly type: string = ActionTypes.SIGN_OUT_ERROR;
+  constructor(public payload?: any) {}
 }
 
 export class SignedOutAction implements Action {
@@ -115,6 +117,11 @@ export class ConsentRetrieveErrorAction implements Action {
   constructor(public payload?: any) {}
 }
 
+export class TokenSessionLoginAction implements Action {
+  public readonly type = ActionTypes.TOKEN_SESSION_LOGIN;
+  constructor(public payload?: any) {}
+}
+
 export type Actions =
   | AuthenticateAction
   | AuthenticationSuccessAction
@@ -129,5 +136,7 @@ export type Actions =
   | ConsentRetrieveErrorAction
   | SignOutAction
   | SignedOutAction
+  | SignOutSuccessAction
   | SignUpAction
-  | SignedUpAction;
+  | SignedUpAction
+  | TokenSessionLoginAction;

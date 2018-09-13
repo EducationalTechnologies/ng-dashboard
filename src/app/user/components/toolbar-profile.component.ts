@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { State, getAuthenticatedUser } from "../../reducers";
+import { SignOutAction } from "../user.actions";
 
 @Component({
   selector: "app-toolbar-profile",
@@ -14,7 +15,7 @@ export class ToolbarProfileComponent implements OnInit {
   constructor(private store: Store<State>) {}
 
   onLogoutClick() {
-    
+    this.store.dispatch(new SignOutAction());
   }
 
   ngOnInit() {

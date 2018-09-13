@@ -63,7 +63,7 @@ export function reducer(state: any = initialState, action: Actions): State {
         loading: true
       });
 
-    case ActionTypes.SIGNED_OUT:
+    case ActionTypes.SIGN_OUT_SUCCESS:
       return Object.assign({}, state, {
         authenticated: false,
         error: null,

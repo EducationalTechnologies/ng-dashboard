@@ -29,10 +29,13 @@ import {
   ConsentRetrieveAction,
   ConsentRetrieveSuccessAction,
   ConsentRetrieveErrorAction,
-  SignOutSuccessAction
+  SignOutSuccessAction,
+  SignoutErrorAction,
+  TokenSessionLoginAction
 } from "./user.actions";
 import { Router } from "../../../node_modules/@angular/router";
 import { ConsentService } from "./services/consent.service";
+import { ApiService } from "../core/services";
 
 @Injectable()
 export class UserEffects {
@@ -60,21 +63,38 @@ export class UserEffects {
         );
     });
 
-    @Effect()
-    public signOut: Observable<Action> = this.actions
+  @Effect()
+  public tokenLogin: Observable<Action> = this.actions
+    .ofType(ActionTypes.TOKEN_SESSION_LOGIN)
+    .map((action: TokenSessionLoginAction) => action.payload)
+    .switchMap(payoad => {
+      console.log("Retrieving User");
+      return this.userService
+        .populate()
+        .pipe(
+          map(
+            user => new AuthenticationSuccessAction({ user: user }),
+            catchError(error =>
+              of(new AuthenticationErrorAction({ error: error }))
+            )
+          )
+        );
+    });
+
+  @Effect()
+  public signOut: Observable<Action> = this.actions
     .ofType(ActionTypes.SIGN_OUT)
     .map((action: SignOutAction) => action.payload)
     .switchMap(payload => {
       return this.userService
-      .signOut()
-      .pipe(
-        map(
-          result => new SignOutSuccessAction(),
-          catchError(error => 
-            of(new Signoute))
-        )
-      )
-    })
+        .signOut()
+        .pipe(
+          map(
+            result => new SignOutSuccessAction(),
+            catchError(error => of(new SignoutErrorAction({ error: error })))
+          )
+        );
+    });
 
   @Effect({ dispatch: false })
   public authenticatedSuccess = this.actions

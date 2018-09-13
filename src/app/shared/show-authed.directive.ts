@@ -42,7 +42,7 @@ export class ShowAuthedDirective implements OnInit, OnDestroy {
 
   renderElementOnAuthenticated(auth: boolean) {
     console.log("Auth state: ", auth);
-    if ((auth && this.condition) || (!auth && this.condition)) {
+    if ((auth && this.condition) || (!auth && !this.condition)) {
       this.viewContainer.createEmbeddedView(this.templateRef);
     } else {
       this.viewContainer.clear();
