@@ -10,6 +10,8 @@ export const ActionTypes = {
   AUTHENTICATED_SUCCESS: "[user] Authenticated Success",
   SIGN_OUT: "[user] Sign out",
   SIGNED_OUT: "[user] Signed out",
+  SIGN_OUT_ERROR: "[user] Sign out error",
+  SIGN_OUT_SUCCESS: "[user] Sign out success",
   SIGN_UP: "[user] Sign up",
   SIGNED_UP: "[user] Signed up",
   CONSENT_SUBMIT: "[user] Consent Submit",
@@ -54,6 +56,16 @@ export class SignOutAction implements Action {
   public readonly type: string = ActionTypes.SIGN_OUT;
 
   constructor(public payload?: any) {}
+}
+
+export class SignOutSuccessAction implements Action {
+  public readonly type: string = ActionTypes.SIGN_OUT_SUCCESS;
+
+  constructor(public payload?: any) {}
+}
+
+export class SignoutErrorAction implements Action {
+  public readonly type: string = ActionTypes.SIGN_OUT_ERROR;
 }
 
 export class SignedOutAction implements Action {

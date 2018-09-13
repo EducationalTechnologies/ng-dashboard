@@ -28,7 +28,8 @@ import {
   SignUpAction,
   ConsentRetrieveAction,
   ConsentRetrieveSuccessAction,
-  ConsentRetrieveErrorAction
+  ConsentRetrieveErrorAction,
+  SignOutSuccessAction
 } from "./user.actions";
 import { Router } from "../../../node_modules/@angular/router";
 import { ConsentService } from "./services/consent.service";
@@ -58,6 +59,22 @@ export class UserEffects {
           )
         );
     });
+
+    @Effect()
+    public signOut: Observable<Action> = this.actions
+    .ofType(ActionTypes.SIGN_OUT)
+    .map((action: SignOutAction) => action.payload)
+    .switchMap(payload => {
+      return this.userService
+      .signOut()
+      .pipe(
+        map(
+          result => new SignOutSuccessAction(),
+          catchError(error => 
+            of(new Signoute))
+        )
+      )
+    })
 
   @Effect({ dispatch: false })
   public authenticatedSuccess = this.actions

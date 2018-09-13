@@ -1,4 +1,11 @@
-<div class="nav-link">
-  <img [src]="avatarImgPath" class="user-image"/>
-  <span [innerHTML]='username'></span>
-</div>
+<ul class="navbar-nav nav">
+  <li class="nav-item d-none d-sm-inline-block">
+    <a (click)="onLogoutClick()" class="nav-link">Logout</a>
+  </li>
+  <li class="nav-item d-none d-sm-inline-block">
+    <div class="nav-link">
+      <img [src]="avatarImgPath" class="user-image" />
+      <span [innerHTML]='username'></span>
+    </div>
+  </li>
+</ul>

@@ -1,24 +1,17 @@
 <div class="wrapper">
   <lte-header>
 
-    <ul class="navbar-nav nav">
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="." class="nav-link">Home</a>
-      </li>
+    <ul class="navbar-nav nav" *appShowAuthed="false">
       <li class="nav-item d-none d-sm-inline-block">
         <a routerLink="/user/signup" class="nav-link">Sign up</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a routerLink="/user/signin" class="nav-link">Login</a>
       </li>
-      <li 
-      class="nav-item d-none d-sm-inline-block"
-      *appShowAuthed="true">
-        <app-toolbar-profile>
-  
-        </app-toolbar-profile>
-      </li>
     </ul>
+    <app-toolbar-profile *appShowAuthed="true">
+
+    </app-toolbar-profile>
   </lte-header>
 
   <lte-main-sidebar logo="../assets/images/TLA_Dashboard_Shield.png" brand="TRULA" link="">

@@ -13,14 +13,16 @@ export class ToolbarProfileComponent implements OnInit {
 
   constructor(private store: Store<State>) {}
 
+  onLogoutClick() {
+    
+  }
+
   ngOnInit() {
     this.avatarImgPath = "../assets/images/avatar_sample.png";
 
-    const x = this.store
-      .select(getAuthenticatedUser)
-      .subscribe(user => {
-        console.log("Store Subscription Toolbar Profile: ", user);
-        this.username = user.email;
-      });
+    const x = this.store.select(getAuthenticatedUser).subscribe(user => {
+      console.log("Store Subscription Toolbar Profile: ", user);
+      this.username = user.email;
+    });
   }
 }

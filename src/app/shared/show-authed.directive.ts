@@ -32,7 +32,7 @@ export class ShowAuthedDirective implements OnInit, OnDestroy {
     this.subscription = this.store
       .select(function(state) {
         return state.user.authenticated;
-      } )
+      })
       .subscribe(auth => this.renderElementOnAuthenticated(auth));
   }
 
@@ -41,7 +41,8 @@ export class ShowAuthedDirective implements OnInit, OnDestroy {
   }
 
   renderElementOnAuthenticated(auth: boolean) {
-    if (auth) {
+    console.log("Auth state: ", auth);
+    if ((auth && this.condition) || (!auth && this.condition)) {
       this.viewContainer.createEmbeddedView(this.templateRef);
     } else {
       this.viewContainer.clear();
