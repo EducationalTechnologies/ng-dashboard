@@ -21,11 +21,7 @@ export class UserService {
 
   populate(): Observable<User> {
     if (this.jwtService.getToken()) {
-      return this.apiService.get("/user/").pipe(
-        map(data => {
-          return data;
-        })
-      );
+      return this.apiService.get("/user");
     }
   }
 

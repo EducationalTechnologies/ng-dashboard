@@ -31,7 +31,8 @@ import {
   ConsentRetrieveErrorAction,
   SignOutSuccessAction,
   SignoutErrorAction,
-  TokenSessionLoginAction
+  TokenSessionLoginAction,
+  AuthenticationRedirectAction
 } from "./user.actions";
 import { Router } from "../../../node_modules/@angular/router";
 import { ConsentService } from "./services/consent.service";
@@ -43,7 +44,8 @@ export class UserEffects {
     private actions: Actions,
     private userService: UserService,
     private consentService: ConsentService,
-    private router: Router
+    private router: Router,
+    private apiService: ApiService
   ) {}
 
   @Effect()
@@ -69,16 +71,19 @@ export class UserEffects {
     .map((action: TokenSessionLoginAction) => action.payload)
     .switchMap(payoad => {
       console.log("Retrieving User");
-      return this.userService
-        .populate()
-        .pipe(
-          map(
-            user => new AuthenticationSuccessAction({ user: user }),
-            catchError(error =>
-              of(new AuthenticationErrorAction({ error: error }))
-            )
-          )
-        );
+      return this.apiService.get("/user").pipe(
+        map(user => {
+          console.log("Retrieved user: ", user);
+          if (user) {
+            return new AuthenticationSuccessAction({ user: user });
+          } else {
+            return new AuthenticationRedirectAction();
+          }
+        }),
+        catchError(error => {
+          return of(new AuthenticationErrorAction({ error: error }));
+        })
+      );
     });
 
   @Effect()
@@ -86,14 +91,10 @@ export class UserEffects {
     .ofType(ActionTypes.SIGN_OUT)
     .map((action: SignOutAction) => action.payload)
     .switchMap(payload => {
-      return this.userService
-        .signOut()
-        .pipe(
-          map(
-            result => new SignOutSuccessAction(),
-            catchError(error => of(new SignoutErrorAction({ error: error })))
-          )
-        );
+      return this.userService.signOut().pipe(
+        map(result => new SignOutSuccessAction()),
+        catchError(error => of(new SignoutErrorAction({ error: error })))
+      );
     });
 
   @Effect({ dispatch: false })
