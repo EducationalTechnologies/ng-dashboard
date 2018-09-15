@@ -10,7 +10,7 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ConsentService } from "../services/consent.service";
 import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
-import { getConsent, State, getAuthenticatedUser } from "../../reducers";
+import { getConsent, State, getAuthenticatedUser, isLoading } from "../../reducers";
 import { User } from "../models/user";
 import { ConsentSubmitAction, ConsentRetrieveAction } from "../user.actions";
 // import { LoggingService } from "../logging/logging.service";
@@ -49,12 +49,15 @@ export class ConsentPageComponent implements OnInit, OnDestroy {
     this.store.select(getConsent).subscribe(c => {
       console.log("THIS CONSENT: ", c);
       this.consent = c;
-      // this.consentForm.patchValue(this.consent);
+    });
+
+
+    this.store.select(isLoading).subscribe(loading => {
+      console.log("THIS LOADING: ", loading);
+      this.loading = loading;
     });
 
     this.consentObservable = this.store.select(getConsent);
-
-    this.loading = true;
 
     for (let i = 0; i < 100; i++) {
       // tslint:disable-next-line:max-line-length

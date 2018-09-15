@@ -18,7 +18,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
-        <h4>What data is collected?</h4>
+        <h3>What data is collected?</h3>
         <ul>
           <li *ngFor="let data of consentItem.dataCollected">
             {{data}}
@@ -26,9 +26,15 @@
         </ul>
       </div>
       <div>
-        <h4 class="mat-h4">How long is this data stored?</h4>
+        <h3 class="mat-h4">How long is this data stored?</h3>
         <p>
           The {{consentItem.name}} will be stored for {{consentItem.storageDuration}} days
+        </p>
+      </div>
+      <div>
+        <h3 class="mat-h4">What is the purpose of the collection?</h3>
+        <p>
+          The {{consentItem.name}} will be used for:
         </p>
       </div>
     </mat-expansion-panel>

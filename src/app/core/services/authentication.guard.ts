@@ -9,15 +9,16 @@ import { Observable } from "rxjs";
 import { Store, select } from "@ngrx/store";
 import { map, take } from "rxjs/operators";
 
-import { isAuthenticated, State } from "../../reducers";
+import { State } from "../../reducers";
 
 import * as AuthActions from "../../user/user.actions";
+import { isAuthenticated, UserState } from "../../user/user.reducers";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthenticationGuard implements CanActivate {
-  constructor(private store: Store<State>, private router: Router) {}
+  constructor(private store: Store<UserState>, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,

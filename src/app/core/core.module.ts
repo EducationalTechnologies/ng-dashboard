@@ -8,8 +8,9 @@ import { ApiService } from "./services/api.service";
 import { JwtService } from "./services/jwt.service";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { HttpTokenInterceptor } from "./interceptors/http.token.interceptor";
+import { ShowAuthedDirective } from "./show-authed.directive";
 
-export const COMPONENTS = [];
+export const COMPONENTS = [ShowAuthedDirective];
 
 @NgModule({
   imports: [CommonModule, RouterModule],

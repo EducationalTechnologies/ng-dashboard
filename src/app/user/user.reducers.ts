@@ -1,69 +1,69 @@
-import { Actions, ActionTypes } from "./user.actions";
+import { UserActionsUnion, UserActionTypes } from "./user.actions";
 
 import { User } from "./models/user";
 import { Consent } from "./models/consent";
-
-export interface State {
+import { createSelector } from "@ngrx/store";
+export interface UserState {
   authenticated: boolean;
   loading: boolean;
   user: User;
   consent: Consent;
 }
 
-const initialState: State = {
+const initialState: UserState = {
   loading: false,
   authenticated: false,
   user: null,
   consent: null
 };
 
-export function reducer(state: any = initialState, action: Actions): State {
+export function reducer(state: any = initialState, action: UserActionsUnion): UserState {
   switch (action.type) {
-    case ActionTypes.AUTHENTICATE:
-    case ActionTypes.CONSENT_RETRIEVE:
-    case ActionTypes.CONSENT_SUBMIT:
+    case UserActionTypes.AUTHENTICATE:
+    case UserActionTypes.CONSENT_RETRIEVE:
+    case UserActionTypes.CONSENT_SUBMIT:
       return Object.assign({}, state, {
         loading: true
       });
 
-    case ActionTypes.AUTHENTICATION_ERROR:
+    case UserActionTypes.AUTHENTICATION_ERROR:
       return Object.assign({}, state, {
         authenticated: false,
         error: action.payload.error.message,
         loading: false
       });
 
-    case ActionTypes.CONSENT_RETRIEVE_SUCCESS:
+    case UserActionTypes.CONSENT_RETRIEVE_SUCCESS:
       return Object.assign({}, state, {
         consent: action.payload.consent
       });
 
-    case ActionTypes.CONSENT_SUBMITTED_SUCCESS:
+    case UserActionTypes.CONSENT_SUBMITTED_SUCCESS:
       return Object.assign({}, state, {
         consent: action.payload.consent,
         loading: false
       });
 
-    case ActionTypes.SIGNED_UP:
-    case ActionTypes.AUTHENTICATION_SUCCESS:
+    case UserActionTypes.SIGNED_UP:
+    case UserActionTypes.AUTHENTICATION_SUCCESS:
       return Object.assign({}, state, {
-        loading: true,
+        loading: false,
         authenticated: true,
         user: action.payload.user
       });
-    case ActionTypes.AUTHENTICATED_SUCCESS:
+    case UserActionTypes.AUTHENTICATED_SUCCESS:
       return Object.assign({}, state, {
         loading: false
       });
-    case ActionTypes.SIGN_UP:
-    case ActionTypes.SIGN_OUT:
+    case UserActionTypes.SIGN_UP:
+    case UserActionTypes.SIGN_OUT:
       return Object.assign({}, state, {
         authenticated: false,
         error: null,
         loading: true
       });
 
-    case ActionTypes.SIGN_OUT_SUCCESS:
+    case UserActionTypes.SIGN_OUT_SUCCESS:
       return Object.assign({}, state, {
         authenticated: false,
         error: null,
@@ -75,10 +75,16 @@ export function reducer(state: any = initialState, action: Actions): State {
   }
 }
 
-export const isAuthenticated = (state: State) => state.authenticated;
+export const isAuthenticated = (state: UserState) => state.authenticated;
 
-export const getAuthenticatedUser = (state: State) => state.user;
+export const getAuthenticatedUser = (state: UserState) => state.user;
 
-export const getConsent = (state: State) => state.consent;
+export const getConsent = (state: UserState) => state.consent;
 
-export const isLoading = (state: State) => state.loading;
+export const isLoading = (state: UserState) => state.loading;
+
+export const userState = (state: UserState) => state;
+
+export const getConsentUser = createSelector(userState, getConsent);
+
+export const getIsLoadingUser = createSelector(userState, isLoading);

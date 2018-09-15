@@ -6,7 +6,7 @@ import {
   TemplateRef,
   ViewContainerRef
 } from "@angular/core";
-import { UserService } from "../core/services";
+import { UserService } from "./services";
 import { State } from "../reducers";
 import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";

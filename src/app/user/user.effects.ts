@@ -14,7 +14,7 @@ import { UserService } from "../core/services/user.service";
 import { User } from "./models/user";
 
 import {
-  ActionTypes,
+  UserActionTypes,
   AuthenticateAction,
   AuthenticatedSuccessAction,
   AuthenticationSuccessAction,
@@ -50,7 +50,7 @@ export class UserEffects {
 
   @Effect()
   public authenticate: Observable<Action> = this.actions
-    .ofType(ActionTypes.AUTHENTICATE)
+    .ofType(UserActionTypes.AUTHENTICATE)
     .map((action: AuthenticateAction) => action.payload)
     .switchMap(payload => {
       return this.userService
@@ -67,7 +67,7 @@ export class UserEffects {
 
   @Effect()
   public tokenLogin: Observable<Action> = this.actions
-    .ofType(ActionTypes.TOKEN_SESSION_LOGIN)
+    .ofType(UserActionTypes.TOKEN_SESSION_LOGIN)
     .map((action: TokenSessionLoginAction) => action.payload)
     .switchMap(payoad => {
       console.log("Retrieving User");
@@ -88,7 +88,7 @@ export class UserEffects {
 
   @Effect()
   public signOut: Observable<Action> = this.actions
-    .ofType(ActionTypes.SIGN_OUT)
+    .ofType(UserActionTypes.SIGN_OUT)
     .map((action: SignOutAction) => action.payload)
     .switchMap(payload => {
       return this.userService.signOut().pipe(
@@ -98,17 +98,33 @@ export class UserEffects {
     });
 
   @Effect({ dispatch: false })
+  public authenticationError: Observable<Action> = this.actions
+    .ofType(UserActionTypes.AUTHENTICATION_ERROR)
+    .map((action: AuthenticationErrorAction) => action.payload)
+    .pipe(
+      tap(payload => {
+        if (payload.error) {
+          if (payload.error.status === 401) {
+            this.router.navigate(["/user/signin"]);
+          }
+        }
+      })
+    );
+
+  @Effect({ dispatch: false })
   public authenticatedSuccess = this.actions
-    .ofType(ActionTypes.AUTHENTICATION_SUCCESS)
+    .ofType(UserActionTypes.AUTHENTICATION_SUCCESS)
     .pipe(
       tap(() => {
         this.router.navigate(["/courses"]);
       })
     );
 
+    @Effect({dispatch: false})
+
   @Effect({ dispatch: false })
   public authenticationRedirect = this.actions
-    .ofType(ActionTypes.AUTHENTICATION_REDIRECT)
+    .ofType(UserActionTypes.AUTHENTICATION_REDIRECT)
     .pipe(
       tap(() => {
         this.router.navigate(["/user/signin"]);
@@ -117,7 +133,7 @@ export class UserEffects {
 
   @Effect()
   public consentSubmitted: Observable<Action> = this.actions
-    .ofType(ActionTypes.CONSENT_SUBMIT)
+    .ofType(UserActionTypes.CONSENT_SUBMIT)
     .map((action: ConsentSubmitAction) => action.payload)
     .switchMap(payload => {
       return this.consentService.setConsent(payload.consent).pipe(
@@ -128,7 +144,7 @@ export class UserEffects {
 
   @Effect()
   public consentRetrieve: Observable<Action> = this.actions
-    .ofType(ActionTypes.CONSENT_RETRIEVE)
+    .ofType(UserActionTypes.CONSENT_RETRIEVE)
     .switchMap(() => {
       return this.consentService.getConsent().pipe(
         map(consent => new ConsentRetrieveSuccessAction({ consent: consent })),

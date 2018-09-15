@@ -1,7 +1,7 @@
 <section class="mat-typography scrollWrapper" id="consentFormWrapper" #consentFormWrapper>
   <div>
     <h1>
-      Informed Consent
+      Informed Consent of the TLA Dashboard
     </h1>
     TODO: Remove this:
     {{consentObservable | async | json}}
@@ -14,7 +14,7 @@
           <mat-card class="dashboard-card">
             <mat-card-header>
               <mat-card-title>
-                <h2>Introduction</h2>
+                <h2>Welcome</h2>
                 <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
                   <mat-icon>more_vert</mat-icon>
                 </button>
@@ -98,6 +98,41 @@
           </mat-card>
 
           <mat-divider></mat-divider>
+
+          <mat-card class="dashboard-card consent-card">
+            <mat-card-header>
+              <mat-card-title>
+                <h2>Consenting to the collection of data</h2>
+                <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" xPosition="before">
+                  <button mat-menu-item>Expand</button>
+                  <button mat-menu-item>Remove</button>
+                </mat-menu>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="dashboard-card-content">
+              <div>
+                <p>
+                  In the following section
+                </p>
+              </div>
+
+              <mat-card-actions>
+                <mat-checkbox formControlName="hasReadDataUsage" id="checkboxDataUsedFor">
+                  <b class="consent-form-control">
+                    I understand that my data will be used for research in the context of the
+                    <a href="https://edutec.guru/">
+                      Trusted Learning Analytics
+                    </a> environment.
+                  </b>
+                </mat-checkbox>
+
+              </mat-card-actions>
+            </mat-card-content>
+          </mat-card>
+
 
           <h2>Data Types</h2>
           <app-consent-item *ngFor="let consentItem of consent.consentItems" [consentItem]="consentItem"></app-consent-item>
