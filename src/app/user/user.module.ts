@@ -22,6 +22,7 @@ import { UserEffects } from "./user.effects";
 import { reducer } from './user.reducers';
 import { ReactiveFormsModule} from "@angular/forms";
 import { ToolbarProfileComponent } from './components/toolbar-profile.component';
+import { ContactFormComponent } from './components/contact-form.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -44,7 +45,8 @@ import { ToolbarProfileComponent } from './components/toolbar-profile.component'
     LoginSelectionPageComponent,
     SignupPageComponent,
     SignInPageComponent,
-    ToolbarProfileComponent
+    ToolbarProfileComponent,
+    ContactFormComponent
   ],
   exports: [
     ToolbarProfileComponent

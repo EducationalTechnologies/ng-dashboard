@@ -7,6 +7,7 @@ import { PrivacySettingsPageComponent } from "./pages/privacy-settings-page.comp
 import { SignupPageComponent } from "./pages/signup-page.component";
 import { SignInPageComponent } from "./pages/signin-page.component";
 import { AuthenticationGuard } from '../core/services/authentication.guard';
+import { ContactFormComponent } from "./components/contact-form.component";
 
 const routes: Routes = [
   { path: "", component: SettingsPageComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: "timeline", component: TimelinePageComponent },
   { path: "settings/privacy", component: PrivacySettingsPageComponent, canActivate: [AuthenticationGuard] },
   { path: "signin", component: SignInPageComponent },
-  { path: "signup", component: SignupPageComponent }
+  { path: "signup", component: SignupPageComponent },
+  { path: "contact", component: ContactFormComponent }
 ];
 
 @NgModule({

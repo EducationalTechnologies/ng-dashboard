@@ -22,10 +22,6 @@
 
             <mat-list>
               <mat-list-item *ngFor="let data of selectedCourse.data; let i = index" (click)="highlightClickedRow(courseIndex, i)" [class.active-row]="i == selectedRow">
-                <button mat-icon-button>
-                  <mat-icon>info</mat-icon>
-                </button>
-
                 <span class="data-name">{{ data.name }}</span>
                 <div class="enable-slider">
                   <mat-slide-toggle color="primary" [(ngModel)]="data.enabled" [checked]="data.enabled" [disabled]="disabled">
@@ -165,7 +161,8 @@
         </mat-card-header>
         <mat-card-content>
           <p>
-            You can contact us at any time if you have questions regarding the collection, storage, or processing of your data.
+            You can contact us at any time if you have questions regarding the collection, storage, or processing of your data. <br/>
+            If you want, you can contact us via <a href="mailto:drachsler@dipf.de">Email</a> or use the contact form below.  
           </p>
         </mat-card-content>
         <mat-card-actions>

@@ -1,0 +1,62 @@
+.mat-card {
+    padding: 0 !important;
+}
+
+.mat-card-header {
+    padding: 24px 16px 16px !important;
+}
+
+.mat-card-header + .mat-card-content {
+    padding-top: 0 !important;
+}
+
+.mat-card-header-text {
+    margin: 0 !important;
+}
+
+.mat-card-title-group {
+    margin: 0 !important;
+    padding: 16px !important;
+}
+
+.mat-card-title-group + .mat-card-content {
+    padding-top: 0 !important;
+}
+
+.mat-card-avatar {
+    margin-right: 16px !important;
+}
+
+.mat-card-title {
+    line-height: 20px !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+}
+
+.mat-card-subtitle {
+    line-height: 20px !important;
+    margin: 0 !important;
+    font-size: 14px !important;
+}
+
+.mat-card-image {
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+.mat-card-content {
+    font-size: 14px;
+    margin: 0px !important;
+    padding: 16px !important;
+}
+
+.mat-card-actions {
+    margin: 0 !important;
+    padding: 8px !important;
+}
+
+.mat-card-footer {
+    margin: 0 !important;
+    padding: 16px 16px 24px !important;
+    position: static !important;
+}

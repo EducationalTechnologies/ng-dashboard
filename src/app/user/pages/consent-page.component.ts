@@ -52,12 +52,10 @@ export class ConsentPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ConsentRetrieveAction());
 
     this.store.select(getConsent).subscribe(c => {
-      console.log("THIS CONSENT: ", c);
       this.consent = c;
     });
 
     this.store.select(isLoading).subscribe(loading => {
-      console.log("THIS LOADING: ", loading);
       this.loading = loading;
     });
 
