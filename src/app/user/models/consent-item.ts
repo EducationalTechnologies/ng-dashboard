@@ -3,7 +3,7 @@ export class ConsentItem {
     public id: string,
     public name: string,
     public description: string,
-    public consented: string,
+    public consented: boolean,
     public icon: string
   ) {}
 }

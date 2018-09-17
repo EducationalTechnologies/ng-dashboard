@@ -72,6 +72,12 @@ export class ConsentPageComponent implements OnInit, OnDestroy {
 
   consentToAll() {
     console.log("Consenting to the collection of all data");
+
+    for (let i = 0; i < this.consent.consentItems.length; i++) {
+      const ci = this.consent.consentItems[i];
+      console.log(ci);
+      ci.consented = true;
+    }
   }
 
   ngOnDestroy(): void {}
