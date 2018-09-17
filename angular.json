@@ -27,6 +27,7 @@
                 "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
               },
               "src/styles.css",
+              "src/material-modifications.scss",
               "node_modules/ng-admin-lte/assets/css/adminlte.css",
               "./node_modules/font-awesome/css/font-awesome.css"
             ],

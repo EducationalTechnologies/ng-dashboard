@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { SettingsService } from "../services/settings.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-privacy-settings",
@@ -12,7 +13,10 @@ export class PrivacySettingsPageComponent implements OnInit {
   selectedDataItem: any = null;
   selectedRow = 0;
 
-  constructor(private settingsService: SettingsService) {}
+  constructor(
+    private settingsService: SettingsService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.settingsService.getSettingsData().subscribe(data => {
@@ -41,4 +45,8 @@ export class PrivacySettingsPageComponent implements OnInit {
     this.selectedCourseIndex = courseIndex;
     this.selectedDataItem = this.selectedCourse.data[this.selectedRow];
   };
+
+  contactPrivacy() {
+    this.router.navigateByUrl("/contact");
+  }
 }
