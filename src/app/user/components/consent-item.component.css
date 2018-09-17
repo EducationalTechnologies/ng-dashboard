@@ -7,3 +7,13 @@
 .card-title-with-icon > h3 {
     margin: 0 0 0 15px;
 }
+
+.mat-slide-toggle-content {
+  
+}
+
+@media (max-width: 720px) {
+  .mat-slide-toggle-content {
+    white-space: initial !important;
+  }
+}

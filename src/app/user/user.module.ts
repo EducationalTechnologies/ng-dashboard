@@ -11,17 +11,18 @@ import { EventService } from "./services/event.service";
 import { SettingsService } from "./services/settings.service";
 import { TimelinePageComponent } from "./pages/timeline-page.component";
 import { PrivacySettingsPageComponent } from "./pages/privacy-settings-page.component";
-import { TimelineItemComponent } from './components/timeline-item.component';
-import { ConsentItemComponent } from './components/consent-item.component';
-import { LoginSelectionPageComponent } from './pages/login-selection-page.component';
-import { SignupPageComponent } from './pages/signup-page.component';
-import { SignInPageComponent } from './pages/signin-page.component';
-import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { TimelineItemComponent } from "./components/timeline-item.component";
+import { ConsentItemComponent } from "./components/consent-item.component";
+import { LoginSelectionPageComponent } from "./pages/login-selection-page.component";
+import { SignupPageComponent } from "./pages/signup-page.component";
+import { SignInPageComponent } from "./pages/signin-page.component";
+import { EffectsModule } from "@ngrx/effects";
+import { StoreModule } from "@ngrx/store";
 import { UserEffects } from "./user.effects";
-import { reducer } from './user.reducers';
-import { ReactiveFormsModule} from "@angular/forms";
-import { ToolbarProfileComponent } from './components/toolbar-profile.component';
+import { reducer } from "./user.reducers";
+import { ReactiveFormsModule } from "@angular/forms";
+import { ToolbarProfileComponent } from "./components/toolbar-profile.component";
+import { ContactFormComponent } from "./components/contact-form.component";
 @NgModule({
   imports: [
     CommonModule,
@@ -30,7 +31,7 @@ import { ToolbarProfileComponent } from './components/toolbar-profile.component'
     NgAdminLteModule,
     MaterialModule,
     CoreModule,
-    StoreModule.forFeature('user', reducer),
+    StoreModule.forFeature("user", reducer),
     EffectsModule.forFeature([UserEffects]),
     ReactiveFormsModule
   ],
@@ -44,11 +45,10 @@ import { ToolbarProfileComponent } from './components/toolbar-profile.component'
     LoginSelectionPageComponent,
     SignupPageComponent,
     SignInPageComponent,
-    ToolbarProfileComponent
+    ToolbarProfileComponent,
+    ContactFormComponent
   ],
-  exports: [
-    ToolbarProfileComponent
-  ],
+  exports: [ToolbarProfileComponent],
   providers: [SettingsService, ConsentService, EventService]
 })
 export class UserModule {}

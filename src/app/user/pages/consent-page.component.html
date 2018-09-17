@@ -3,8 +3,7 @@
     <h1>
       Informed Consent of the TLA Dashboard
     </h1>
-    TODO: Remove this:
-    {{consentObservable | async | json}}
+    TODO: Remove this: {{consentObservable | async | json}}
     <div class="text-center">
       <p class="lead" *ngIf="loading">Loading...</p>
     </div>
@@ -43,11 +42,7 @@
                 </div>
               </mat-expansion-panel>
               <mat-card-actions>
-                <mat-checkbox 
-
-                formControlName="hasReadIntroduction" 
-                class="consent-form-control" 
-                name="checkboxIntroduction" required>
+                <mat-checkbox formControlName="hasReadIntroduction" class="consent-form-control" name="checkboxIntroduction" required>
                   <b class="consent-form-control">
                     I understand that I can choose not to opt-in into the collection of data and that I will suffer no disadvantages from doing
                     so
@@ -99,6 +94,11 @@
 
           <mat-divider></mat-divider>
 
+
+
+          <h2>Data Types</h2>
+
+
           <mat-card class="dashboard-card consent-card">
             <mat-card-header>
               <mat-card-title>
@@ -114,21 +114,17 @@
             </mat-card-header>
             <mat-card-content class="dashboard-card-content">
               <div>
-                <p>
-                  In the following 
+                <p *ngFor="let paragraph of consent.dataTypeIntroduction">
+                  {{paragraph}}
                 </p>
               </div>
 
               <mat-card-actions>
-                <button
-                (click)="consentToAll()"
-                mat-raised-button color="primary">Consent to all</button>
+                <button type="button" (click)="consentToAll()" mat-raised-button color="primary">Consent to all</button>
               </mat-card-actions>
             </mat-card-content>
           </mat-card>
 
-
-          <h2>Data Types</h2>
           <app-consent-item *ngFor="let consentItem of consent.consentItems" [consentItem]="consentItem"></app-consent-item>
           <!--
           <mat-card class="data-type-card" *ngFor="let dataType of consentData.consentItems">

@@ -52,12 +52,10 @@ export class  ConsentPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(new ConsentRetrieveAction());
 
     this.store.select(getConsent).subscribe(c => {
-      console.log("THIS CONSENT: ", c);
       this.consent = c;
     });
 
     this.store.select(isLoading).subscribe(loading => {
-      console.log("THIS LOADING: ", loading);
       this.loading = loading;
     });
 
@@ -72,6 +70,12 @@ export class  ConsentPageComponent implements OnInit, OnDestroy {
 
   consentToAll() {
     console.log("Consenting to the collection of all data");
+
+    for (let i = 0; i < this.consent.consentItems.length; i++) {
+      const ci = this.consent.consentItems[i];
+      console.log(ci);
+      ci.consented = true;
+    }
   }
 
   ngOnDestroy(): void {}
