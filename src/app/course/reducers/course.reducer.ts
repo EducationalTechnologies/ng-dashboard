@@ -1,7 +1,7 @@
 import {
     CourseActionTypes,
     CourseActionsUnion,
-} from './../actions/course.actions';
+} from '../actions/course.actions';
 
 import { Course } from '../models/course';
 

@@ -1,6 +1,11 @@
 import { Component, OnInit, Input, HostBinding } from '@angular/core';
 import { DashboardPageColumn } from '../../models/dashboard';
 import { ICardOptions } from 'ng-admin-lte/src/app/modules/ng-admin-lte/card/card.component';
+import { Store } from '@ngrx/store';
+import * as fromDashboard from '../../reducers';
+import * as QueryActions from '../../actions/query.actions';
+import { Observable } from 'rxjs';
+import * as fromQuery from '../../reducers/query.reducer';
 
 @Component({
   selector: 'ng-dashboard-column',
@@ -13,33 +18,25 @@ export class DashboardColumnComponent implements OnInit {
   public cardOptionsCloseMe: ICardOptions;
   public cardOptionsNewProject: ICardOptions;
 
-  
-  vizId = "ngx-gauge"
-  data = {
-    "metadata": {
-        "xAxis": "Country",
-        "yAxis": "Population",
-    },
-    "data": [
-        {
-            "name": "Netherlands",
-            "value": 52
-        },
-        {
-            "name": "France",
-            "value": 72
-        }
-    ]
-  }
+  private data$ : Observable<any>;
 
-  constructor() { 
+  vizId = "ngx-gauge"
+
+  data =[
+    {data: [65, 59, 90, 81, 56, 55, 40], label: 'Series A'},
+    {data: [28, 48, 40, 19, 96, 27, 100], label: 'Series B'}
+  ];
+
+  constructor(private store: Store<fromDashboard.State>) { 
     this.cardOptionsCloseMe = { button: [ { icon: {'fa': true, 'fa-times': true} }] }
-    this.cardOptionsNewProject = { button: [{ label: "New Project", id:"newProjectBtn" } ] }
+    this.cardOptionsNewProject = { button: [] } //{ label: "New Project2", id:"newProjectBtn" } 
 
   }
 
   ngOnInit() {
-    
+    this.store.dispatch(new QueryActions.Query({queryId:"queryId"}));
+    this.data$=this.store.select(fromDashboard.getResult("queryId"));
+
   }
 
   clickHeaderButton(val) {

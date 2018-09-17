@@ -1,0 +1,181 @@
+<section class="mat-typography">
+  <h1>Privacy Settings</h1>
+  <div class="settings-wrapper">
+    <div class="settings-overview-card">
+      <mat-card>
+        <mat-card-header color="primary" class="card-title">
+          <mat-card-title>
+            <h3>Data by Course</h3>
+          </mat-card-title>
+        </mat-card-header>
+
+        <div class="mat-content-grid">
+
+          <div class="data-items-list">
+            <mat-form-field>
+              <mat-select class="course-select" [(value)]="selectedCourse" (change)="onCourseSelectionChange($event)" placeholder="Select Course">
+                <mat-option *ngFor="let course of courseData" [value]="course">
+                  {{ course.title}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-list>
+              <mat-list-item *ngFor="let data of selectedCourse.data; let i = index" (click)="highlightClickedRow(courseIndex, i)" [class.active-row]="i == selectedRow">
+                <button mat-icon-button>
+                  <mat-icon>info</mat-icon>
+                </button>
+
+                <span class="data-name">{{ data.name }}</span>
+                <div class="enable-slider">
+                  <mat-slide-toggle color="primary" [(ngModel)]="data.enabled" [checked]="data.enabled" [disabled]="disabled">
+                    <span *ngIf="data.enabled" class="label">Enabled</span>
+                    <span *ngIf="!data.enabled" class="label">Disabled</span>
+                  </mat-slide-toggle>
+                </div>
+
+                <div class="functions-dropdown-list">
+                  <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item>
+                      <mat-icon>save_alt</mat-icon>
+                      <span>Download</span>
+                    </button>
+                    <button mat-menu-item>
+                      <mat-icon>delete</mat-icon>
+                      <span>Delete</span>
+                    </button>
+                  </mat-menu>
+                </div>
+
+                <div class="button-horizontal-list">
+
+                  <button mat-raised-button>
+                    <mat-icon>save_alt</mat-icon>
+                    DOWNLOAD
+                  </button>
+                  <button mat-raised-button>
+                    <mat-icon>delete</mat-icon>
+                    DELETE
+                  </button>
+                </div>
+              </mat-list-item>
+            </mat-list>
+          </div>
+          <!-- 
+          <div class="selected-data-item">
+
+            <mat-card *ngIf="selectedDataItem" class="example-card">
+              <mat-card-header>
+                <mat-card-title>
+                  <h3>{{ selectedDataItem.name }}</h3>
+                </mat-card-title>
+              </mat-card-header>
+              <mat-card-content>
+                <p>
+                  {{ selectedDataItem.description }}
+                </p>
+                <p>
+                  This data is used in the following course widgets that you can view in your dashboard:
+                </p>
+                <mat-list *ngFor="let widget of getWidgetsForSelected(); let courseIndex = index">
+                  <mat-list-item>
+                    {{ widget.name }}
+                  </mat-list-item>
+                </mat-list>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button color="primary">
+                  DOWNLOAD
+                  <i class="fa fa-download" aria-hidden="true"> </i>
+                </button>
+                <button mat-raised-button color="warn">DELETE
+                  <i class="fa fa-times" aria-hidden="true"> </i>
+                </button>
+              </mat-card-actions>
+            </mat-card>
+
+          </div> -->
+
+        </div>
+      </mat-card>
+
+    </div>
+
+
+
+    <div class="functionality-card">
+
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title class="subheading-2">
+            <h3>
+              Download
+            </h3>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            You can download all the data that has been collected about you. If you choose to do so, an archive (.zip) will be created
+            and you will be able to download it once it is ready.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">
+            <mat-icon>archive</mat-icon>
+            Create Download Archive
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+
+    </div>
+
+
+
+    <div class="functionality-card">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title class="subheading-2">
+            <h3>Delete</h3>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            You can delete all of the data that is stored about you.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">
+            <mat-icon>delete_forever</mat-icon>
+            Delete
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div class="functionality-card">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title class="subheading-2">
+            <h3>Contact</h3>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            You can contact us at any time if you have questions regarding the collection, storage, or processing of your data.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary">
+            <mat-icon>home</mat-icon>
+            Contact
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+  </div>
+</section>

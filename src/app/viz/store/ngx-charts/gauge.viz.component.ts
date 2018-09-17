@@ -25,10 +25,13 @@ export class GaugeChartVizComponent implements VizComponentInterface {
   
 
     setVisualisationData(data: any) {
-        console.log(data);
-        this.data = data.data;
+        //console.log(data);
+        if (data) this.data = data.data;
         // this.xAxisLabel = data.metadata.xAxis;
         // this.yAxisLabel = data.metadata.yAxis;
+    }
+
+    setConfig(config: any): void {
     }
 
 }

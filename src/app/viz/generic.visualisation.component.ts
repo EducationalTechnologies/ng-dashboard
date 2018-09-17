@@ -24,7 +24,8 @@ export class GenericVisualisationComponent implements AfterViewInit, OnDestroy {
 
   @Input() id: string;
   @Input() visData: string;
-  
+  @Input() config: any;
+
   @ViewChild(VizDirective) vizHost: VizDirective;
   viz: VisualisationDynamicComponent;
 
@@ -50,6 +51,7 @@ export class GenericVisualisationComponent implements AfterViewInit, OnDestroy {
       viewContainerRef.clear();
       let componentRef = viewContainerRef.createComponent(componentFactory);
       (<VizComponentInterface>componentRef.instance).setVisualisationData(this.visData);
+      if (this.config) (<VizComponentInterface>componentRef.instance).setConfig(this.config);
 
     }, 100);
 

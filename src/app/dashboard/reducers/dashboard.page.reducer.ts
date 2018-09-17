@@ -1,7 +1,7 @@
 import {
     DashboardActionTypes,
     DashboardActionsUnion,
-} from './../actions/dashboard.actions';
+} from '../actions/dashboard.actions';
 
 import { DashboardPage, DashboardPageRow } from '../models/dashboard';
 
@@ -63,7 +63,6 @@ export function reducer(
         }
 
         case DashboardActionTypes.DCLoadSuccess:{
-            console.log(action.payload)
             if (state.pages) {
                 state.pages.map(entry => {
                     if (entry.id == action.payload.pageId) {

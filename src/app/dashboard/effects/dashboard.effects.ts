@@ -11,7 +11,7 @@ import { Effect, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store'
 
-import * as DashboardActions from './../actions/dashboard.actions';
+import * as DashboardActions from '../actions/dashboard.actions';
 import { DashboardService } from '../../core/services/dashboard.service';
 import { from } from 'rxjs/observable/from';
 import { map } from 'rxjs/operators';
@@ -82,7 +82,6 @@ export class DashboardEffects {
         .mergeMap(
             wId => this.dashboard.getWidget(wId)
                 .map(res => {
-                    console.log("widget res", res);
                     var drls = new DashboardActions.WidgetLoadSuccess(res)
                     return drls;
                 })

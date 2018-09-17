@@ -8,13 +8,15 @@ import * as fromRoot from '../../reducers';
 
 import * as fromDashboard from './dashboard.page.reducer';
 import * as fromWidget from './widget.reducer';
+import * as fromQueries from './query.reducer';
 
 import { DashboardPage, Widget } from '../models/dashboard';
-import { map } from '../../../../node_modules/rxjs-compat/operator/map';
+import { map } from 'rxjs-compat/operator/map';
 
 export interface DashboardState {
     pages: fromDashboard.State;
     widgets: fromWidget.State;
+    queryResults : fromQueries.State
 }
 
 export interface State extends fromRoot.State {
@@ -23,15 +25,15 @@ export interface State extends fromRoot.State {
 
 export const reducers: ActionReducerMap<DashboardState> = {
     pages: fromDashboard.reducer,
-    widgets: fromWidget.reducer
+    widgets: fromWidget.reducer,
+    queryResults: fromQueries.reducer
 };
+export const getDashboard = createFeatureSelector<DashboardState>('dashboard');
 
 export const selectWidgets = (state: State) => {
-    console.log("select widgets", state.dashboard.widgets)
     return state.dashboard.widgets};
 
 export const selectPages = (state: State) => state.dashboard.pages.pages;
-
 
 
 export const selectPagesIds = createSelector(
@@ -54,14 +56,12 @@ export const currentPageWithWidgets = createSelector(
     selectCurrentPage,
     
     (widget,page ) => {
-        console.log("currentPageWithWidgets1", page)
         if (page && widget && page.rows) {
-            console.log("currentPageWithWidgets2", page.rows)
             page.rows.map(row => {
                 if (row.columns) {
                     row.columns.map(column => {
-                        console.log("currentPageWithWidgets3", column)
-                        column.widget = widget[column.widgetId];
+                        
+                        // column.widget = widget[column.widgetId];
 
                     });
                 }
@@ -74,4 +74,14 @@ export const currentPageWithWidgets = createSelector(
         return {id:"mock", name:"missing", rows:[]};
     }
 
+)
+
+
+
+export const getResult =  (queryId:string) => createSelector(
+    getDashboard,
+    (db) => {
+        
+        return db.queryResults.results[queryId]
+    }
 )

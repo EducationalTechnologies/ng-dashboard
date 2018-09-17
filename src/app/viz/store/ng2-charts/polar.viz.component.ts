@@ -8,19 +8,35 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 })
 export class PolarChartVizComponent implements VizComponentInterface {
     
-//   data :any = [
-   
-//   ];
-  public radarChartLabels:string[] = ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'];
+  public radarChartLabels:string[] = [];//['Time Investment', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'];
  
-  public data:any = [
-    {data: [65, 59, 90, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 96, 27, 100], label: 'Series B'}
+
+  data =[
+    {data: [5, 5, 5, 5, 5, 5, 5], label: 'Goal'},
+    {data: [6, 6, 6, 5, 5, 5, 6], label: 'Your Investment'}
   ];
+
   public radarChartType:string = 'radar';
  
   dim: number=0;
   sliderVisible = false;
+ 
+  setVisualisationData(data: any) {
+      if (data) {
+          this.radarChartLabels = data.metadata.dimensions
+          data.data.map((row, index)=>{
+             this.data[index].data = row;
+             this.data[index].label = data.metadata.series[index];
+          })
+      }
+    //incomming data, todo
+
+    
+}
+
+setConfig(config: any): void {
+}
+  
   // events
   public chartClicked(e:any):void {
       if (e.active && e.active[0]&&e.active[0]._datasetIndex == 1){
@@ -49,15 +65,8 @@ public changeParam(e:any, i:any) {
   
   
 
-    setVisualisationData(data: any) {
-        console.log(data.data);
-        var rcd= []
-        for (var i=0;i<data.data.length;i++){
-            rcd[i] = {data:data.data[i].series, label:data.data[i].name}
-        }
-        this.radarChartLabels = data.metadata.labels;
-        this.data = rcd;
-    }
+    
+    
 
     onClick(e:any){
         console.log("click");

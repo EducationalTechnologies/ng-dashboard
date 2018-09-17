@@ -1,4 +1,5 @@
 export interface VizComponentInterface {
-    
-    setVisualisationData(id:string):void;
-  }
+
+  setVisualisationData(id: string): void;
+  setConfig(config: any): void;
+}

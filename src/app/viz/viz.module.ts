@@ -6,12 +6,14 @@ import { ArrayVizComponent } from './store/array.viz.component';
 import { VizService } from './visualisation.service';
 import {NgxChartsVizModule} from './store/ngx-charts/ngx.charts.module'
 import {Ng2ChartsVizModule} from './store/ng2-charts/ng2.charts.module'
+import {GenericVizModule} from './store/generic/generic.module'
 
 @NgModule({
     imports: [
         CommonModule,
         NgxChartsVizModule.forRoot(),
-        Ng2ChartsVizModule.forRoot()
+        Ng2ChartsVizModule.forRoot(),
+        GenericVizModule.forRoot()
     ],
 
     declarations: [

@@ -1,8 +1,14 @@
 
     
     <lte-card [title]="column.title" [options]="cardOptionsNewProject" (btnClick)="clickHeaderButton($event)">
-    
-        {{column|json}}
-    <visualisation *ngIf="column.widget" [id]="column.widget.vizId" [visData]="data"></visualisation>
+    <!-- {{data$|async|json}} -->
+        
+         <!-- {{column|json}}<br> -->
+        
+    <ng-widget *ngFor="let widget of column.widgets" 
+        [type]="widget.type" 
+        [config]="widget.config" 
+        [queryId]="widget.queryId" 
+        [resultsFormat]="widget.resultsFormat"></ng-widget>
 
     </lte-card>

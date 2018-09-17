@@ -6,8 +6,12 @@ import { VizComponentInterface } from '../../visualisation.component.interface';
 })
 export class PolarChartVizComponent implements VizComponentInterface {
     view: any[] = [400, 400];
-  data :any = [
+//   data :any = [
    
+//   ];
+  data =[
+    {data: [5, 5, 5, 5, 5, 5, 5], label: 'Series A'},
+    {data: [28, 48, 40, 19, 96, 27, 100], label: 'Series B'}
   ];
   public radarChartLabels:string[] = ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'];
  
@@ -38,8 +42,8 @@ export class PolarChartVizComponent implements VizComponentInterface {
   
 
     setVisualisationData(data: any) {
-        console.log(data.data);
-        this.data = data.data;
+        // console.log(data.data);
+        // this.data = data.data;
     }
 
     onClick(e:any){
@@ -53,4 +57,8 @@ export class PolarChartVizComponent implements VizComponentInterface {
     activate(e:any){
         console.log("activate");
     }
+
+    setConfig(config: any): void {
+    }
+
 }

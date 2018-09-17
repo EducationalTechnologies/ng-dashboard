@@ -27,14 +27,15 @@ export interface DashboardPage {
     id: string;
     width:  number
     title : string;
-    widgetId:string;
-    widget?:Widget;
+    classes?: string;
+    widgetId?:string;  //todo remove
+    widgets?:Widget[];
   }
 
   export interface Widget {
-    id: string;
-    vizId: string;
-    queryId:  string;
-    name : string;
-    richText : string;
+    type: string;
+    // vizId: string;
+    queryId?:  string;
+    resultsFormat? : string;
+    text? : string;
   }

@@ -15,4 +15,17 @@ export class DashboardRowComponent implements OnInit {
   ngOnInit() {
   }
 
+  setMyClasses(col) {
+    if (col) {
+      let classes = {
+      };
+      col.split(" ").map(x=>classes[x]=true);
+      return classes;
+    }
+    return {
+      "col-lg-12":true
+    }
+    
+  }
+
 }

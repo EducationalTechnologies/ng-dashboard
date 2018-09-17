@@ -1,7 +1,7 @@
 import {
     DashboardActionTypes,
     DashboardActionsUnion,
-} from './../actions/dashboard.actions';
+} from '../actions/dashboard.actions';
 import { Widget } from '../models/dashboard';
 
 export interface State {
@@ -18,10 +18,10 @@ export function reducer(
     action: DashboardActionsUnion
 ): State {
     switch (action.type) {
-        case DashboardActionTypes.WidgetLoadSuccess: {
-            state.widgetStore[action.widget.id]= action.widget
-            return state;
-        }
+        // case DashboardActionTypes.WidgetLoadSuccess: {
+        //     state.widgetStore[action.widget.id]= action.widget
+        //     return state;
+        // }
         default: {
             return state;
         }

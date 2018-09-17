@@ -37,10 +37,13 @@ export class BarChartVizComponent implements VizComponentInterface {
     data: any;
 
     setVisualisationData(data: any) {
-        console.log(data);
-        this.single = data.data;
-        this.xAxisLabel = data.metadata.xAxis;
-        this.yAxisLabel = data.metadata.yAxis;
+        if (data){
+            this.single = data.data;
+            this.xAxisLabel = data.metadata.xAxis;
+            this.yAxisLabel = data.metadata.yAxis;
+        }
+    }
+    setConfig(config: any): void {
     }
 
 }

@@ -35,5 +35,7 @@ export class ArrayVizComponent implements VizComponentInterface {
         this.header1 = data.metadata.xAxis;
         this.header2 = data.metadata.yAxis;
     }
+    setConfig(config: any): void {
+    }
 
 }

@@ -1,26 +1,40 @@
 <div class="wrapper">
   <lte-header>
 
-    <li class="nav-item d-none d-sm-inline-block">
-      <a href="." class="nav-link">Home</a>
-    </li>
-    
+    <ul class="navbar-nav nav">
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="." class="nav-link">Home</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a routerLink="/user/signup" class="nav-link">Sign up</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a routerLink="/user/signin" class="nav-link">Login</a>
+      </li>
+    </ul>
+    <ul *appShowAuthed="true">
+      <app-toolbar-profile>
 
+      </app-toolbar-profile>
+      <li>
+        Test Authed
+      </li>
+    </ul>
   </lte-header>
 
-  <lte-main-sidebar logo="" brand="TRULA" link="">
-      <li lte-menu-item [hasChildren]="false" title ="Courses" router="/courses">
+
+  <lte-main-sidebar logo="../assets/images/TLA_Dashboard_Shield.png" brand="TRULA" link="">
+    <li lte-menu-item [hasChildren]="false" title="Courses" router="/courses">
       <li lte-menu-item [hasChildren]="true" title="Pages" router="/dashboard/course/3fa85f64-5717-4562-b3fc-2c963f66afa6">
       
-          <ul ng-sidebar-pages-menu class="nav nav-treeview"></ul>
-  
-      </li>
-      
+        <ul ng-sidebar-pages-menu class="nav nav-treeview"></ul>
 
-  
-  
-    </lte-main-sidebar>
+    </li>
+      <li lte-menu-item [hasChildren]="false" title="Privacy" router="/user"></li>
+
+  </lte-main-sidebar>
+
   <div class="content-wrapper">
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </div>
 </div>

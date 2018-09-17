@@ -5,7 +5,7 @@ import {Effect, Actions} from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import {Action} from '@ngrx/store'
 
-import * as CourseActions from './../actions/course.actions';
+import * as CourseActions from '../actions/course.actions';
 import { CourseService } from '../../core/services/course.service';
 
 

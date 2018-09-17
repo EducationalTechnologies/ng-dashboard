@@ -4,8 +4,8 @@ import { BarChartVizComponent } from './barchart.viz.component';
 import { GaugeChartVizComponent} from './gauge.viz.component'
 import { PolarChartVizComponent} from './polar.viz.component'
 
-import { VizService } from './../../visualisation.service';
-import { VisualisationDynamicComponent} from './../../visualisation.dynamic.component';
+import { VizService } from '../../visualisation.service';
+import { VisualisationDynamicComponent} from '../../visualisation.dynamic.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
