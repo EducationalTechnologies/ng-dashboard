@@ -10,7 +10,12 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { ConsentService } from "../services/consent.service";
 import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
-import { getConsent, State, getAuthenticatedUser, isLoading } from "../../reducers";
+import {
+  getConsent,
+  State,
+  getAuthenticatedUser,
+  isLoading
+} from "../../reducers";
 import { User } from "../models/user";
 import { ConsentSubmitAction, ConsentRetrieveAction } from "../user.actions";
 // import { LoggingService } from "../logging/logging.service";
@@ -51,7 +56,6 @@ export class ConsentPageComponent implements OnInit, OnDestroy {
       this.consent = c;
     });
 
-
     this.store.select(isLoading).subscribe(loading => {
       console.log("THIS LOADING: ", loading);
       this.loading = loading;
@@ -64,6 +68,10 @@ export class ConsentPageComponent implements OnInit, OnDestroy {
       this.termsText +=
         "Water spinach arugula pea tatsoi aubergine spring onion bush tomato kale radicchio turnip chicory salsify pea sprouts fava bean";
     }
+  }
+
+  consentToAll() {
+    console.log("Consenting to the collection of all data");
   }
 
   ngOnDestroy(): void {}
@@ -82,8 +90,6 @@ export class ConsentPageComponent implements OnInit, OnDestroy {
 
     console.log(this.consent);
 
-    this.store.dispatch(
-      new ConsentSubmitAction({ consent: this.consent })
-    );
+    this.store.dispatch(new ConsentSubmitAction({ consent: this.consent }));
   }
 }

@@ -115,20 +115,14 @@
             <mat-card-content class="dashboard-card-content">
               <div>
                 <p>
-                  In the following section
+                  In the following 
                 </p>
               </div>
 
               <mat-card-actions>
-                <mat-checkbox formControlName="hasReadDataUsage" id="checkboxDataUsedFor">
-                  <b class="consent-form-control">
-                    I understand that my data will be used for research in the context of the
-                    <a href="https://edutec.guru/">
-                      Trusted Learning Analytics
-                    </a> environment.
-                  </b>
-                </mat-checkbox>
-
+                <button
+                (click)="consentToAll()"
+                mat-raised-button color="primary">Consent to all</button>
               </mat-card-actions>
             </mat-card-content>
           </mat-card>

@@ -24,6 +24,8 @@ export function reducer(state: any = initialState, action: ActionsUnion) {
       return Object.assign({}, state, {
         loading: false
       });
+    default:
+      return state;
   }
 }
 

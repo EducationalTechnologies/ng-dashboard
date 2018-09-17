@@ -36,6 +36,9 @@
         <p>
           The {{consentItem.name}} will be used for:
         </p>
+        <li *ngFor="let purpose of consentItem.purposes">
+          {{purpose}}
+        </li>
       </div>
     </mat-expansion-panel>
 

@@ -9,11 +9,13 @@ import { JwtService } from "./services/jwt.service";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { HttpTokenInterceptor } from "./interceptors/http.token.interceptor";
 import { ShowAuthedDirective } from "./show-authed.directive";
+import { SidenavComponent } from "./layout/sidenav.component";
+import { NgAdminLteModule } from "ng-admin-lte";
 
-export const COMPONENTS = [ShowAuthedDirective];
+export const COMPONENTS = [ShowAuthedDirective, SidenavComponent];
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NgAdminLteModule],
   declarations: COMPONENTS,
   exports: COMPONENTS
 })
