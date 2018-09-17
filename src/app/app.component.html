@@ -1,10 +1,7 @@
 <div class="wrapper">
   <lte-header>
 
-    <ul class="navbar-nav nav">
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="." class="nav-link">Home</a>
-      </li>
+    <ul class="navbar-nav nav" *appShowAuthed="false">
       <li class="nav-item d-none d-sm-inline-block">
         <a routerLink="/user/signup" class="nav-link">Sign up</a>
       </li>
@@ -12,14 +9,9 @@
         <a routerLink="/user/signin" class="nav-link">Login</a>
       </li>
     </ul>
-    <ul *appShowAuthed="true">
-      <app-toolbar-profile>
+    <app-toolbar-profile *appShowAuthed="true">
 
-      </app-toolbar-profile>
-      <li>
-        Test Authed
-      </li>
-    </ul>
+    </app-toolbar-profile>
   </lte-header>
 
 
@@ -31,8 +23,9 @@
 
     </li>
       <li lte-menu-item [hasChildren]="false" title="Privacy" router="/user"></li>
-
+  
   </lte-main-sidebar>
+  <!-- <app-sidenav></app-sidenav> -->
 
   <div class="content-wrapper">
     <router-outlet></router-outlet>

@@ -12,6 +12,7 @@ import * as fromRouter from "@ngrx/router-store";
 import * as fromLayout from "../core/reducers/layout.reducer";
 
 import * as user from "../user/user.reducers";
+import * as core from "../core/reducers/core.reducer";
 
 export interface State {
 // <<<<<<< HEAD
@@ -49,13 +50,15 @@ export interface State {
 // =======
   layout: fromLayout.State;
   router: fromRouter.RouterReducerState;
-  user: user.State;
+  user: user.UserState;
+  core: core.CoreState;
 }
 
 export const reducers: ActionReducerMap<State> = {
   layout: fromLayout.reducer,
   router: routerReducer,
-  user: user.reducer
+  user: user.reducer,
+  core: core.reducer
 };
 
 export const getLayoutState = createFeatureSelector<fromLayout.State>("layout");
@@ -68,6 +71,8 @@ export const getShowSidenav = createSelector(
 export const getRouterState = (state: State) => state.router;
 
 export const getUserState = (state: State) => state.user;
+
+export const getCoreState = (state: State) => state.core;
 
 export const getAuthenticatedUser = createSelector(
   getUserState,
@@ -90,8 +95,14 @@ export const selectCurrentPageId = createSelector(
   getRouterState,
   router => router.state.root.firstChild.firstChild.params.pageId
 );
+
 export const selectCurrentCourseId = createSelector(
   getRouterState,
   router => router.state.root.firstChild.firstChild.params.courseId
 );
-//>>>>>>> 5a7e54e839fda2aeae024134305103b1a8cb86c9
+
+
+export const isLoading = createSelector(
+  getCoreState,
+  core.loading
+);

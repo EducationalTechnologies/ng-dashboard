@@ -14,12 +14,15 @@ export class ApiService {
 
   constructor(private http: HttpClient, private jwtService: JwtService) {
     this.headers = new HttpHeaders();
-    this.headers = this.headers.set("Content-Type", "application/json; charset=utf-8");
+    this.headers = this.headers.set(
+      "Content-Type",
+      "application/json; charset=utf-8"
+    );
   }
 
   private formatErrors(error: Response | any) {
-    // const body = error.json();
-    return Observable.throw(error);
+    // TODO: Do something with all errors
+    return throwError(error);
   }
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {

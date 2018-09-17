@@ -6,7 +6,7 @@ import {
   TemplateRef,
   ViewContainerRef
 } from "@angular/core";
-import { UserService } from "../core/services";
+import { UserService } from "./services";
 import { State } from "../reducers";
 import { Store } from "@ngrx/store";
 import { Observable, Subscription } from "rxjs";
@@ -31,9 +31,8 @@ export class ShowAuthedDirective implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.store
       .select(function(state) {
-        console.log("Init app show authed, state: " + state.user.authenticated);
         return state.user.authenticated;
-      } )
+      })
       .subscribe(auth => this.renderElementOnAuthenticated(auth));
   }
 
@@ -42,7 +41,8 @@ export class ShowAuthedDirective implements OnInit, OnDestroy {
   }
 
   renderElementOnAuthenticated(auth: boolean) {
-    if (auth) {
+    console.log("Auth state: ", auth);
+    if ((auth && this.condition) || (!auth && !this.condition)) {
       this.viewContainer.createEmbeddedView(this.templateRef);
     } else {
       this.viewContainer.clear();

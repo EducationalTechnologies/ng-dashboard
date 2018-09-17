@@ -19,9 +19,9 @@ export class UserService {
 
   constructor(private apiService: ApiService, private jwtService: JwtService) {}
 
-  populate() {
+  populate(): Observable<User> {
     if (this.jwtService.getToken()) {
-      this.apiService.get("/user/");
+      return this.apiService.get("/user");
     }
   }
 
@@ -39,8 +39,9 @@ export class UserService {
       map(data => {
         this.jwtService.saveToken(data.user.token);
         this._isLoggedIn = true;
-        return data;
-      }),
+        console.log("After Sign In: ", data);
+        return data.user;
+      })
     );
   }
 

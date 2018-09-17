@@ -1,0 +1,24 @@
+<lte-main-sidebar logo="../assets/images/TLA_Dashboard_Shield.png" brand="TLA" link="">
+  <!-- <li lte-menu-item [hasChildren]="false" title="Courses" router="/courses"> -->
+  <li>
+    <a 
+    routerLink="/courses" routerlinActive="activeSidenav">
+      <img src="../assets/images/dashboard.svg" class="sideNavLinkImg" />
+      <br/>
+      <span>Dashboard</span>
+    </a>
+  </li>
+  <li>
+    <a routerLink="/user" routerlinActive="activeSidenav">
+      <img src="../assets/images/global-settings.svg" class="sideNavLinkImg"/>
+      <br />
+      <span>Settings</span>
+    </a>
+  </li>
+  <!-- <li lte-menu-item [hasChildren]="true" title="Pages" router="/">
+    <ul ng-sidebar-pages-menu class="nav nav-treeview">
+    </ul>
+  </li>
+  <li lte-menu-item [hasChildren]="false" title="Privacy" router="/user"></li> -->
+
+</lte-main-sidebar>

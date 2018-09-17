@@ -29,7 +29,6 @@ export class HttpTokenInterceptor implements HttpInterceptor {
     if (token) {
       headersConfig["Authorization"] = `Token ${token}`;
     }
-    console.log("intercepted http request, appended token");
     const request = req.clone({ setHeaders: headersConfig });
     return next.handle(request);
   }

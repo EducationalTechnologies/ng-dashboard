@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { UserService } from "./core/services";
+import { Store } from "@ngrx/store";
+import { State } from "./reducers";
+import { TokenSessionLoginAction } from "./user/user.actions";
 
 @Component({
   selector: "app-root",
@@ -7,9 +10,9 @@ import { UserService } from "./core/services";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
-  constructor(private userService: UserService) {}
+  constructor(private store: Store<State>) {}
 
   ngOnInit() {
-    this.userService.populate();
+    this.store.dispatch(new TokenSessionLoginAction());
   }
 }

@@ -1,18 +1,4 @@
-// <<<<<<< HEAD
-// import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { RouterModule } from '@angular/router';
 
-
-// import { CourseService } from './services/course.service';
-// import { DashboardService } from './services/dashboard.service';
-
-
-
-// export const COMPONENTS = [
-
-// ];
-// =======
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
@@ -26,13 +12,17 @@ import { HttpTokenInterceptor } from "./interceptors/http.token.interceptor";
 import { EffectsModule } from '@ngrx/effects';
 import {RouterEffects} from './effects/router.effects'
 import { QueryService } from "./services/query.service";
-export const COMPONENTS = [];
-// >>>>>>> 5a7e54e839fda2aeae024134305103b1a8cb86c9
+import { ShowAuthedDirective } from "./show-authed.directive";
+import { SidenavComponent } from "./layout/sidenav.component";
+import { NgAdminLteModule } from "ng-admin-lte";
+
+export const COMPONENTS = [ShowAuthedDirective, SidenavComponent];
 
 @NgModule({
   imports: [
     CommonModule, 
     RouterModule,
+    NgAdminLteModule,
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([RouterEffects])
   ],

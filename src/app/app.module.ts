@@ -16,7 +16,6 @@ import { VizModule } from "./viz/viz.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AuthenticationGuard } from "./core/services/authentication.guard";
 import { UserService } from "./core/services/user.service";
-import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +23,6 @@ import { SharedModule } from "./shared/shared.module";
     BrowserModule,
     BrowserAnimationsModule,
     UserModule,
-    SharedModule,
     AppRoutingModule,
     HttpClientModule,
     DashboardModule,
