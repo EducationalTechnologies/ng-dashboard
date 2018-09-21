@@ -1,14 +1,10 @@
+<lte-card [title]="column.title" [options]="cardOptionsNewProject" (btnClick)="clickHeaderButton($event)">
 
-    
-    <lte-card [title]="column.title" [options]="cardOptionsNewProject" (btnClick)="clickHeaderButton($event)">
-    <!-- {{data$|async|json}} -->
-        
-         <!-- {{column|json}}<br> -->
-        
     <ng-widget *ngFor="let widget of column.widgets" 
         [type]="widget.type" 
         [config]="widget.config" 
-        [queryId]="widget.queryId" 
-        [resultsFormat]="widget.resultsFormat"></ng-widget>
+        [queryId]="widget.queryId"
+        [resultsFormat]="widget.resultsFormat">
+    </ng-widget>
 
-    </lte-card>
+</lte-card>

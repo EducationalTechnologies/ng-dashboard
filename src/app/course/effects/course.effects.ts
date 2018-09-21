@@ -17,7 +17,6 @@ export class CourseEffects {
      .switchMap(
          payload =>  this.courses.list()
          .map(res => {
-             console.log('im here', res);
              return new CourseActions.LoadSuccess(res);
         })
        
@@ -26,7 +25,6 @@ export class CourseEffects {
     constructor(
         private actions$: Actions,
         private courses: CourseService
-        // @Inject('config') private config:any
     ) {
 
     }

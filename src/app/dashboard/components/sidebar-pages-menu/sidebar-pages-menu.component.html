@@ -1,7 +1,5 @@
-
-  
-  
-    <li *ngFor="let page of pages$|async" lte-menu-item [hasChildren]="false" 
-            [title]="page.name" router="/dashboard/page/{{page.id}}"></li>
+ 
+    <li *ngFor="let page of selectPagesForCourse$|async | keyvalue" lte-menu-item [hasChildren]="false" 
+            [title]="page.value.name" router="/dashboard/course/{{selectCurrentCourseId$|async}}/page/{{page.key}}"></li>
   
 

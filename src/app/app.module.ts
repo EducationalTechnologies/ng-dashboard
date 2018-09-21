@@ -31,7 +31,7 @@ import { UserService } from "./core/services/user.service";
     VizModule,
     CoreModule.forRoot(),
     StoreDevtoolsModule.instrument({
-      name: 'NgRx TRULA Store DevTools',
+      name: 'TRULA Dashboard',
       logOnly: environment.production,
 
     }),

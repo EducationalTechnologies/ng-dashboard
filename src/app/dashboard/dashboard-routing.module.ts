@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
-import { TestComponent } from './pages/test/test.component';
 import { PageResolver } from './routing/page-resolver';
-import { DashboardMainPageComponent } from './pages/dashboard-main-page/dashboard-main-page.component';
-import { DashboardCourseComponent } from './pages/dashboard-course/dashboard-course.component';
+
+import { CourseResolver } from './routing/course-resolver';
 const routes: Routes = [
-  { path: '', component: DashboardMainPageComponent },
-  { path: 'course/:courseId', component: DashboardCourseComponent },
-  { path: 'page/:pageId', component: DashboardPageComponent, resolve :{data: PageResolver} },
+  
+  // { path: 'course/:courseId', component: DashboardCourseComponent, resolve :{data: CourseResolver}  },
+  // { path: 'page/:pageId', component: DashboardPageComponent, resolve :{data: PageResolver} },
+  { path: 'course/:courseId/page/:pageId', component: DashboardPageComponent, resolve :{data: PageResolver} },
 
 ];
 

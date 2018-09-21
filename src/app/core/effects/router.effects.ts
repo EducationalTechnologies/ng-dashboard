@@ -38,13 +38,13 @@ export class RouterEffects {
     );
 
     @Effect()
-    navigateToProject$ = this.actions$
+    navigateToCourse$ = this.actions$
         .ofType(RouterActions.ActionTypes.OPEN_COURSE)
         .map((action: RouterActions.OpenCourse) => action.key)
-        .map((id) => {
-            this.router.navigate(["/dashboard/course/" + id, {}])
+        .map((courseId:string) => {
+            this.router.navigate(["/dashboard/course/" + courseId+"/page/index", {}])
             //return new RouterActions.OpenCourseComplete(id)
-            return new DashboardActions.DPLoad()
+            return new DashboardActions.DPLoad({courseId:courseId})
 
         });
 

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import * as DashboardActions from '../../actions/dashboard.actions';
 import { DashboardPage } from '../../models/dashboard';
 
 import * as fromDashboard from '../../reducers';
+import * as fromApp from '../../../reducers';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,14 +13,20 @@ import { Observable } from 'rxjs';
   styleUrls: ['./sidebar-pages-menu.component.css']
 })
 export class SidebarPagesMenuComponent implements OnInit {
-  private pages$ : Observable<DashboardPage[]> = this.store.pipe(select(fromDashboard.selectPages));
+  //private pages$ : Observable<DashboardPage[]> = this.store.pipe(select(fromDashboard.selectPages));
+
+  private selectPagesForCourse$ : Observable<any> = this.store.select(fromDashboard.selectPagesForCourse);
+  private selectCurrentCourseId$ : Observable<DashboardPage[]> = this.store.select(fromApp.selectCurrentCourseId);
 
   constructor(
     private store: Store<fromDashboard.State>
-  ) { }
+  ) { 
+    
+
+  }
 
   ngOnInit() {
-    this.store.dispatch(new DashboardActions.DPLoad());
+    // this.store.dispatch(new DashboardActions.DPLoad());
 
   }
 

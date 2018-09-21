@@ -68,6 +68,8 @@ export const getShowSidenav = createSelector(
   fromLayout.getShowSidenav
 );
 
+export const getRouter = createFeatureSelector<fromRouter.RouterReducerState>('router');
+
 export const getRouterState = (state: State) => state.router;
 
 export const getUserState = (state: State) => state.user;
@@ -92,13 +94,18 @@ export const getCurrentUrl = createSelector(
 );
 
 export const selectCurrentPageId = createSelector(
-  getRouterState,
+  getRouter,
   router => router.state.root.firstChild.firstChild.params.pageId
-);
+); 
+
+; 
 
 export const selectCurrentCourseId = createSelector(
   getRouterState,
-  router => router.state.root.firstChild.firstChild.params.courseId
+  router => {
+    if (!router) return undefined;
+    return router.state.root.firstChild.firstChild.params.courseId
+  }
 );
 
 

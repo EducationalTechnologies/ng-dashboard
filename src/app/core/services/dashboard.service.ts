@@ -12,28 +12,27 @@ export class DashboardService {
   private API_PATH = 'http://localhost:3000/api';
   constructor(private http: HttpClient) {}
 
-  listPages(): Observable<DashboardPage[]> {
-    let url = `/dashboard/pages/3fa85f64-5717-4562-b3fc-2c963f66afa6`
+  listPages(courseId:string): Observable<DashboardPage[]> {
+    let url = `/dashboard/course/`+courseId+'/pages'
     return this.http
       .get<DashboardPage[]>(this.API_PATH+url)
       
   }
 
-  listRows(pageId:string) {
-    let url = `/dashboard/page/${pageId}/rows`
+  listRows(courseId:string, pageId:string) {
+    let url = `/dashboard/course/${courseId}/page/${pageId}/rows`
     return this.http
       .get<DashboardPageRow[]>(this.API_PATH+url)
   }
 
-  listColumns(rowId:string) {
-    console.log('invoking listrows')
-    let url = `/dashboard/page/row/${rowId}/columns`
+  listColumns(courseId:string, pageId:string,rowId:string) {
+    
+    let url = `/dashboard/course/${courseId}/page/${pageId}/row/${rowId}/columns`
     return this.http
       .get<DashboardPageColumn[]>(this.API_PATH+url)
   }
 
   getWidget(widgetId:string){
-    console.log("widgetService",widgetId)
     let url = `/dashboard/widgets/${widgetId}`
     return this.http
       .get<Widget>(this.API_PATH+url)

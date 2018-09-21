@@ -16,30 +16,17 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./dashboard-page.component.css']
 })
 
-export class DashboardPageComponent implements OnInit, OnChanges {
-  // private w$ : Observable<DashboardPage>;
-  private currentPage$ : Observable<DashboardPage>;
-  // private currentPage1$ : Observable<any>;
-  // private currentPage2$ : Observable<any>;
-  // private currentPage3$ : Observable<any>;
+export class DashboardPageComponent implements OnInit {
+  
+  private currentPage$ : Observable<DashboardPage>  = this.store.select(fromDashboard.currentPageNew);
+  
   constructor(
     private store: Store<fromDashboard.State>,
     private route: ActivatedRoute
   ) { 
-    // this.w$ = store.pipe(select(fromDashboard.currentPageWithWidgets));
-    // this.currentPage3$ = store.pipe(select(fromDashboard.selectCurrentPage))
-    // this.currentPage1$ = store.pipe(select(fromDashboard.selectWidgets))
-    this.currentPage$ = store.pipe(select(fromDashboard.currentPageWithWidgets))
-    // this.currentPage3$ = store.pipe(select(fromApp.selectCurrentPageId))
-  }
-
-  ngOnChanges(){
-    var pageId = this.route.snapshot.params.pageId;
-    this.store.dispatch(new DashboardActions.SelectPage(pageId));
   }
 
   ngOnInit() {
-    var pageId = this.route.snapshot.params.pageId;
   }
 
 }

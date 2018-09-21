@@ -3,20 +3,26 @@ import {
     DashboardActionsUnion,
 } from '../actions/dashboard.actions';
 
-import { DashboardPage, DashboardPageRow } from '../models/dashboard';
+import { DashboardPage, DashboardPageRow, DashboardRowMap, DashboardPageColumnMap, DashboardPageMap } from '../models/dashboard';
 
 export interface State {
-    selectedPage:string;
+    // selectedPage:string;
     loaded: boolean;
     loading: boolean;
-    pages: DashboardPage[];
+    // pages: DashboardPage[];
+    pagesMap: DashboardPageMap;
+    rows: DashboardRowMap;
+    columns:DashboardPageColumnMap;
 }
 
 const initialState: State = {
-    selectedPage: "",
+    // selectedPage: "",
     loaded: false,
     loading: false,
-    pages: [],
+    // pages: [],
+    pagesMap: {},
+    rows: {},
+    columns: {},
 };
 
 
@@ -26,16 +32,6 @@ export function reducer(
     action: DashboardActionsUnion
 ): State {
     switch (action.type) {
-        case DashboardActionTypes.SelectPage: {
-            console.log({
-                ...state,
-                selectedPage: action.pageId,
-            })
-            return {
-                ...state,
-                selectedPage: action.pageId,
-            };
-        }
         case DashboardActionTypes.DPLoad: {
             return {
                 ...state,
@@ -44,37 +40,21 @@ export function reducer(
         }
 
         case DashboardActionTypes.DPLoadSuccess: {
-            return {
-                selectedPage: "",
-                loaded: true,
-                loading: false,
-                pages: action.payload,
-            };
+            var toReturn = {...state, loaded:true, loading:false};
+           
+            action.payload.pages.map(page=>{
+                state.pagesMap[action.payload.courseId] = state.pagesMap[action.payload.courseId]|| {};
+                
+                state.pagesMap[action.payload.courseId][page.id] = page;
+            })
+            return {...toReturn};
         }
         case DashboardActionTypes.DRLoadSuccess:{
-            if (state.pages) {
-                state.pages.map(entry => {
-                    if (entry.id == action.payload.pageId) {
-                        entry.rows = action.payload.rows;
-                    }
-                })
-            }
-            return state;
+            return {...state, rows:{...state.rows, [action.payload.pageId] : action.payload.rows}};
         }
 
         case DashboardActionTypes.DCLoadSuccess:{
-            if (state.pages) {
-                state.pages.map(entry => {
-                    if (entry.id == action.payload.pageId) {
-                        entry.rows.map(row => {
-                            if (row.id == action.payload.rowId) {
-                                row.columns = action.payload.columns;
-                            }
-                        })
-                    }
-                })
-            }
-            return state;
+            return {...state, columns:{...state.columns, [action.payload.rowId]:action.payload.columns}};
         }
 
         default: {
@@ -87,4 +67,4 @@ export const getLoaded = (state: State) => state.loaded;
 
 export const getLoading = (state: State) => state.loading;
 
-export const getPages = (state: State) => state.pages;
+// export const getPages = (state: State) => state.pages;
