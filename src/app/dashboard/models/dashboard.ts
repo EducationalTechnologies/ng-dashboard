@@ -36,16 +36,13 @@ export interface DashboardPageColumnMap {
 
 export interface DashboardPageColumn {
   id: string;
-  width: number
   title: string;
   classes?: string;
-  widgetId?: string;  //todo remove
   widgets?: Widget[];
 }
 
 export interface Widget {
   type: string;
-  // vizId: string;
   queryId?: string;
   resultsFormat?: string;
   text?: string;
